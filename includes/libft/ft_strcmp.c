@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 18:42:36 by taomalbe         ###   ########.fr       */
+/*   Created: 2025/01/14 16:49:56 by tomlimon          #+#    #+#             */
+/*   Updated: 2025/01/27 18:41:04 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header/minishell.h"
-
-void	ft_lexer(char *input, t_shell *shell) // fonction qui peux géré les entré
+int	ft_strcmp(char *s1, char *s2)
 {
-	if (!input)
-		return ;
-	shell->tab = ft_split(input, ' ');
-	if (ft_strcmp(shell->tab[0], "echo") == 0)
-		ft_echo(shell->tab);
+	int	i;
+
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (0);
 }

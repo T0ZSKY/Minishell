@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 18:33:54 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/01/27 18:47:09 by taomalbe         ###   ########.fr       */
+/*   Created: 2025/01/27 17:59:41 by tomlimon          #+#    #+#             */
+/*   Updated: 2025/01/27 17:59:54 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header/minishell.h"
+#include "../../../includes/header/minishell.h"
 
-int	is_complex(char *input)
+void ft_echo(char **tab)
 {
-	if (ft_strstr(input, "|") || ft_strstr(input, ">")
-		|| ft_strstr(input, ">>") || ft_strstr(input, "<")
-		|| ft_strstr(input, "<<"))
-		return (1);
-	return (0);
+	int i;
+
+	i = 1;
+	while (tab[i])
+	{
+		printf("%s", tab[i]);
+		i++;
+		if (tab[i])
+			printf(" ");
+	}
+	printf("\n");
 }

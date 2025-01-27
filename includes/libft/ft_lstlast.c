@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 18:33:54 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/01/27 18:47:09 by taomalbe         ###   ########.fr       */
+/*   Created: 2024/11/06 15:46:36 by tomlimon          #+#    #+#             */
+/*   Updated: 2024/11/07 12:17:04 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header/minishell.h"
+#include "libft.h"
 
-int	is_complex(char *input)
+t_list	*ft_lstlast(t_list *lst)
 {
-	if (ft_strstr(input, "|") || ft_strstr(input, ">")
-		|| ft_strstr(input, ">>") || ft_strstr(input, "<")
-		|| ft_strstr(input, "<<"))
-		return (1);
-	return (0);
+	while (lst)
+	{
+		if (lst->next == NULL)
+			return (lst);
+		lst = lst->next;
+	}
+	return (lst);
 }

@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 18:33:54 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/01/27 18:47:09 by taomalbe         ###   ########.fr       */
+/*   Created: 2024/11/07 11:15:50 by tomlimon          #+#    #+#             */
+/*   Updated: 2024/11/07 11:49:27 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header/minishell.h"
+#include "libft.h"
 
-int	is_complex(char *input)
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-	if (ft_strstr(input, "|") || ft_strstr(input, ">")
-		|| ft_strstr(input, ">>") || ft_strstr(input, "<")
-		|| ft_strstr(input, "<<"))
-		return (1);
-	return (0);
+	del((lst)->content);
+	free(lst);
 }

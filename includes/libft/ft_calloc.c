@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 18:33:54 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/01/27 18:47:09 by taomalbe         ###   ########.fr       */
+/*   Created: 2024/11/05 13:39:43 by tomlimon          #+#    #+#             */
+/*   Updated: 2024/11/10 11:19:20 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header/minishell.h"
+#include "libft.h"
 
-int	is_complex(char *input)
+void	*ft_calloc(size_t count, size_t size)
 {
-	if (ft_strstr(input, "|") || ft_strstr(input, ">")
-		|| ft_strstr(input, ">>") || ft_strstr(input, "<")
-		|| ft_strstr(input, "<<"))
-		return (1);
-	return (0);
+	unsigned char	*ptr;
+	size_t			i;
+
+	i = 0;
+	ptr = malloc(count * size);
+	if (!ptr)
+		return (NULL);
+	while (count * size > i)
+	{
+		ptr[i] = 0;
+		i++;
+	}
+	return (ptr);
 }

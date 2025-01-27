@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_lstnew.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 18:33:54 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/01/27 18:47:09 by taomalbe         ###   ########.fr       */
+/*   Created: 2024/11/06 13:46:04 by tomlimon          #+#    #+#             */
+/*   Updated: 2024/11/06 14:54:53 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header/minishell.h"
+#include "libft.h"
 
-int	is_complex(char *input)
+t_list	*ft_lstnew(void *content)
 {
-	if (ft_strstr(input, "|") || ft_strstr(input, ">")
-		|| ft_strstr(input, ">>") || ft_strstr(input, "<")
-		|| ft_strstr(input, "<<"))
-		return (1);
-	return (0);
+	t_list	*nod;
+
+	nod = malloc(sizeof (t_list));
+	if (!nod)
+		return (NULL);
+	nod->content = content;
+	nod->next = NULL;
+	return (nod);
 }

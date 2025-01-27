@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 18:42:36 by taomalbe         ###   ########.fr       */
+/*   Created: 2025/01/20 14:07:07 by tomlimon          #+#    #+#             */
+/*   Updated: 2025/01/27 18:39:57 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header/minishell.h"
-
-void	ft_lexer(char *input, t_shell *shell) // fonction qui peux géré les entré
+char	*ft_strcpy(char *dest, const char *src)
 {
-	if (!input)
-		return ;
-	shell->tab = ft_split(input, ' ');
-	if (ft_strcmp(shell->tab[0], "echo") == 0)
-		ft_echo(shell->tab);
+	unsigned int	i;
+
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

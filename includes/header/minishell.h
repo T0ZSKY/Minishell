@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 18:42:36 by taomalbe         ###   ########.fr       */
+/*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
+/*   Updated: 2025/01/27 18:45:49 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header/minishell.h"
+#ifndef MINISHELL_H
 
-void	ft_lexer(char *input, t_shell *shell) // fonction qui peux géré les entré
+//stucure
+typedef struct s_shell
 {
-	if (!input)
-		return ;
-	shell->tab = ft_split(input, ' ');
-	if (ft_strcmp(shell->tab[0], "echo") == 0)
-		ft_echo(shell->tab);
-}
+	int is_running;
+	char **tab;
+} t_shell;
+
+//include
+
+# include "stdio.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "../../includes/libft/libft.h"
+
+
+//declaration
+void	ft_lexer(char *input, t_shell *shell);
+void	ft_echo(char **tab);
+int		is_complex(char *input);
+
+#endif

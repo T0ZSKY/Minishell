@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 18:42:36 by taomalbe         ###   ########.fr       */
+/*   Created: 2025/01/23 15:36:33 by tomlimon          #+#    #+#             */
+/*   Updated: 2025/01/27 18:41:40 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header/minishell.h"
+#include "libft.h"
 
-void	ft_lexer(char *input, t_shell *shell) // fonction qui peux géré les entré
+int	ft_isspace(char c)
 {
-	if (!input)
-		return ;
-	shell->tab = ft_split(input, ' ');
-	if (ft_strcmp(shell->tab[0], "echo") == 0)
-		ft_echo(shell->tab);
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r')
+		return (1);
+	return (0);
 }
