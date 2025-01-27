@@ -13,9 +13,9 @@ else
 endif
 
 NAME = minishell
-SRCS = ./src/main/main.c
+SRCS = ./srcs/main/main.c
 
-LIBFT_DIR = ./include/libft
+LIBFT_DIR = ./includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 ALL_SRCS = $(SRCS)
