@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 17:50:23 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:55:36 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(int argc, char **argv, char **env)
 	shell.is_running = 1;
 	while (shell.is_running)
 	{
-		input = readline("\033[31mminishell » \033[0m");
+		input = readline("\033[31mminishell » \033[0m"); // entré de l'utilisateur
 		if (!input)
 		{
 			printf("exit\n");
@@ -32,7 +32,7 @@ int main(int argc, char **argv, char **env)
 			shell.is_running = 0;
 			break;
 		}
-		else
+		else // a faire regarder si il y a un pip ou une redirection pour l'envoyé dans une fonction fait expres genre ft_complex
 			ft_lexer(input, &shell);
 	}
 }
