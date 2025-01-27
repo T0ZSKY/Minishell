@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 17:40:14 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:50:23 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int main(int argc, char **argv, char **env)
 			shell.is_running = 0;
 			break;
 		}
-		printf("%s\n", input);
+		else
+			ft_lexer(input, &shell);
 	}
 }

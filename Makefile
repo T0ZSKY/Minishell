@@ -13,7 +13,8 @@ else
 endif
 
 NAME = minishell
-SRCS = ./srcs/main/main.c
+SRCS = ./srcs/main/main.c \
+		./srcs/parser/lexer.c
 
 LIBFT_DIR = ./includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
