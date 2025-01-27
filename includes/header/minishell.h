@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 18:27:44 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:50:19 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void ft_free_tab(char **tab);
 char *find_command_path(char *cmd);
 char *join_path(char *dir, char *cmd);
 char **split_path(char *path);
+void ft_cd(char **tab);
 
 
 #endif
