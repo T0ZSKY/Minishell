@@ -1,0 +1,5 @@
+*.o
+*.out
+*.a
+*.log
+.DS_Store
