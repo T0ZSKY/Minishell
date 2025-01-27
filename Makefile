@@ -1,7 +1,7 @@
 # Détection du système d'exploitation
 UNAME_S := $(shell uname -s)
 
-# compatibilité macos et linux (readline je supprimerais a la fin)
+# changement en fonction de l'os je supprime a la fin
 ifeq ($(UNAME_S),Darwin)  # Si c'est macOS
     READLINE = -I/opt/homebrew/opt/readline/include \
                -L/opt/homebrew/opt/readline/lib -lreadline
@@ -13,9 +13,9 @@ else
 endif
 
 NAME = minishell
-SRCS = ./src/main/main.c
+SRCS = ./srcs/main/main.c
 
-LIBFT_DIR = ./include/libft
+LIBFT_DIR = ./includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 ALL_SRCS = $(SRCS)
