@@ -6,13 +6,13 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 17:55:36 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:13:45 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
 
-int main(int argc, char **argv, char **env)
+int main(int argc, char **argv, char **envp)
 {
 	int i;
 	t_shell shell;
@@ -33,6 +33,6 @@ int main(int argc, char **argv, char **env)
 			break;
 		}
 		else // a faire regarder si il y a un pip ou une redirection pour l'envoyé dans une fonction fait expres genre ft_complex
-			ft_lexer(input, &shell);
+			ft_lexer(input, &shell, envp);
 	}
 }
