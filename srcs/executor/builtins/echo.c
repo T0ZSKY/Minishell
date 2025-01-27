@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 18:00:41 by tomlimon         ###   ########.fr       */
+/*   Created: 2025/01/27 17:59:41 by tomlimon          #+#    #+#             */
+/*   Updated: 2025/01/27 17:59:54 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+#include "../../../includes/header/minishell.h"
 
-//stucure
-typedef struct s_shell
+void ft_echo(char **tab)
 {
-	int is_running;
-	char **tab;
-} t_shell;
+	int i;
 
-//include
-
-#include "stdio.h"
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "../../includes/libft/libft.h"
-
-
-//declaration
-void ft_lexer(char *input, t_shell *shell);
-void ft_echo(char **tab);
-
-#endif
+	i = 1;
+	while (tab[i])
+	{
+		printf("%s", tab[i]);
+		i++;
+		if (tab[i])
+			printf(" ");
+	}
+	printf("\n");
+}
