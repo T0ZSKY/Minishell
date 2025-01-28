@@ -6,19 +6,20 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 18:50:02 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/28 10:04:17 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
 
-int	main(int argc, char **argv, char **env)
+int main(int argc, char **argv, char **envp)
 {
 	int		i;
 	t_shell	shell;
 	char	*input;
 
 	shell.is_running = 1;
+	increment_shell_level();
 	while (shell.is_running)
 	{
 		input = readline("\033[31mminishell » \033[0m"); // entré de l'utilisateur
@@ -41,5 +42,8 @@ int	main(int argc, char **argv, char **env)
 		else
 			printf("complex");
 		free(input);
+		else // a faire regarder si il y a un pip ou une redirection pour l'envoyé dans une fonction fait expres genre ft_complex
+			ft_lexer(input, &shell, envp);
+		add_history(input);
 	}
 }
