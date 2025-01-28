@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 10:30:42 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/23 15:38:23 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:48:39 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
 unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);
 size_t			ft_strlen(const char *str);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
+char			*ft_strstr(const char *haystack, const char *needle);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
 char			*ft_strrchr(const char *s, int c);
 int				ft_tolower(int c);
@@ -45,7 +46,6 @@ int				ft_strcmp(char *s1, char *s2);
 char			*ft_strncpy(char *dest, const char *src, unsigned int n);
 char			*ft_strcpy(char *dest, const char *src);
 int				ft_isspace(char c);
-
 
 //--------------------------part2------------------------//
 

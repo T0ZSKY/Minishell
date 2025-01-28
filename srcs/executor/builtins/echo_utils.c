@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   echo2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 15:36:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 18:41:40 by taomalbe         ###   ########.fr       */
+/*   Created: 2025/01/28 23:47:35 by tomlimon          #+#    #+#             */
+/*   Updated: 2025/01/28 23:48:07 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../../includes/header/minishell.h"
 
-int	ft_isspace(char c)
+void print_clean_str(char *str, int has_next)
 {
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
-		|| c == '\r')
+	printf("%s", str);
+	if (has_next)
+		printf(" ");
+}
+
+int handle_n_flag(char **tab, int *j)
+{
+	if (tab[1] && ft_strcmp(tab[1], "-n") == 0)
+	{
+		*j = 2;
 		return (1);
+	}
 	return (0);
 }

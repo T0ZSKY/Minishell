@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:10:24 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 23:56:07 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:43:25 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,13 @@ void ft_cmd(char **tab, char **envp)
 	{
 		perror("fork");
 		ft_free_tab(args_copy);
-		return;
+		return ;
 	}
 	if (pid == 0)
 	{
 		execute_child(args_copy, envp);
-	} else
+	}
+	else
 	{
 		ft_free_tab(args_copy);
 		waitpid(pid, NULL, 0);
