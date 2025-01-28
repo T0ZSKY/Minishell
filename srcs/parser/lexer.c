@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/28 23:41:54 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/29 00:38:52 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	ft_lexer(char *input, t_shell *shell, char **envp)
 		ft_echo(shell->tab);
 	else if (ft_strcmp(shell->tab[0], "cd") == 0)
 		ft_cd(shell->tab);
+	else if (ft_strcmp(shell->tab[0], "pwd") == 0)
+		ft_pwd(shell->tab);
 	else if (ft_strcmp(shell->tab[0], "export") == 0)
 		ft_export(shell->tab, shell);
 	else if (is_complex(input)) // probleme avec les pip car je peux avoir un pip et un echo dans la meme ligne
