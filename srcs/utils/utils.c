@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:17:02 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 18:42:42 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/29 00:55:37 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char *join_path(char *dir, char *cmd)
 	int i;
 	int j;
 
-	full_path = malloc(strlen(dir) + strlen(cmd) + 2);
+	full_path = malloc(ft_strlen(dir) + ft_strlen(cmd) + 2);
 	if (!full_path)
 		return (NULL);
 	i = 0;
