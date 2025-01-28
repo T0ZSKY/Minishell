@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/28 10:54:07 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:52:25 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,8 @@ int main(int argc, char **argv, char **envp)
 			shell.is_running = 0;
 			break ;
 		}
-		else if (!is_complex(input))// a faire regarder si il y a un pip ou une redirection pour l'envoyé dans une fonction fait expres genre ft_complex
-		{
+		else// a faire regarder si il y a un pip ou une redirection pour l'envoyé dans une fonction fait expres genre ft_complex
 			ft_lexer(input, &shell, envp);
-		}
-		else
-			printf("complex");
 		add_history(input);
 		free(input);
 	}
