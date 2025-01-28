@@ -14,9 +14,10 @@ endif
 
 NAME = minishell
 SRCS = ./srcs/main/main.c \
-		./srcs/parser/lexer.c ./srcs/parser/utils.c\
-		./srcs/executor/builtins/echo.c ./srcs/executor/builtins/cd.c \
-		./srcs/executor/executor.c
+		./srcs/parser/lexer.c \
+		./srcs/executor/builtins/echo.c ./srcs/executor/builtins/cd.c\
+		./srcs/executor/executor.c ./srcs/parser/utils.c \
+		./srcs/utils/utils.c ./srcs/utils/find_path.c ./srcs/utils/shlvl.c\
 
 LIBFT_DIR = ./includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
