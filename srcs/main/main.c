@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/28 10:04:17 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/28 10:20:03 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int main(int argc, char **argv, char **envp)
 {
 	int		i;
-	t_shell	shell;
 	char	*input;
+	t_shell	shell;
 
 	shell.is_running = 1;
 	increment_shell_level();
@@ -33,17 +33,15 @@ int main(int argc, char **argv, char **envp)
 		{
 			free(input);
 			shell.is_running = 0;
-			break;
+			break ;
 		}
 		else if (!is_complex(input))// a faire regarder si il y a un pip ou une redirection pour l'envoyé dans une fonction fait expres genre ft_complex
 		{
-			ft_lexer(input, &shell);
+			ft_lexer(input, &shell, envp);
 		}
 		else
 			printf("complex");
-		free(input);
-		else // a faire regarder si il y a un pip ou une redirection pour l'envoyé dans une fonction fait expres genre ft_complex
-			ft_lexer(input, &shell, envp);
 		add_history(input);
+		free(input);
 	}
 }
