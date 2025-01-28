@@ -6,7 +6,7 @@
 #    By: tomlimon <tom.limon@>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 23:56:39 by tomlimon          #+#    #+#              #
-#    Updated: 2025/01/28 23:56:48 by tomlimon         ###   ########.fr        #
+#    Updated: 2025/01/29 00:01:46 by tomlimon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,8 @@ SRCS = ./srcs/main/main.c \
 LIBFT_DIR = ./includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-ALL_SRCS = $(SRCS)
-
-OBJS = $(ALL_SRCS:.c=.o)
+OBJ_DIR = obj
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 CC = gcc
 CFLAGS =
@@ -60,7 +59,8 @@ $(LIBFT):
 	@echo "$(YELLOW)🔨 Compiling libft... 🚀$(RESET)"
 	$(MAKE) -C $(LIBFT_DIR)
 
-%.o: %.c
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
 	@echo "$(YELLOW)📝 Compiling $<...$(RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(GREEN)✅ Compilation of $< finished$(RESET)"
@@ -68,7 +68,7 @@ $(LIBFT):
 # Cleaning rules
 clean:
 	@echo "$(RED)🧹 Cleaning object files...$(RESET)"
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 	@echo "$(RED)🧹 Cleaning libft objects...$(RESET)"
 	$(MAKE) clean -C $(LIBFT_DIR)
 
