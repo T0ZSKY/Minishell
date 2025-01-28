@@ -6,7 +6,7 @@
 #    By: tomlimon <tom.limon@>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 23:56:39 by tomlimon          #+#    #+#              #
-#    Updated: 2025/01/29 00:38:36 by tomlimon         ###   ########.fr        #
+#    Updated: 2025/01/29 00:47:23 by tomlimon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRCS = ./srcs/main/main.c \
 		./srcs/executor/builtins/echo.c ./srcs/executor/builtins/echo_utils.c ./srcs/executor/builtins/cd.c ./srcs/executor/builtins/export.c\
 		./srcs/executor/builtins/export_utils.c ./srcs/executor/builtins/pwd.c\
 		./srcs/executor/executor.c ./srcs/parser/utils.c \
-		./srcs/utils/utils.c ./srcs/utils/find_path.c ./srcs/utils/shlvl.c\
+		./srcs/utils/utils.c ./srcs/utils/find_path.c ./srcs/utils/shlvl.c ./srcs/utils/ascii.c\
 		./srcs/executor/pipes.c
 
 LIBFT_DIR = ./includes/libft
