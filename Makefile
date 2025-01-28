@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tomlimon <tom.limon@>                      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/01/28 23:56:39 by tomlimon          #+#    #+#              #
+#    Updated: 2025/01/28 23:56:48 by tomlimon         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # Détection du système d'exploitation
 UNAME_S := $(shell uname -s)
 
@@ -15,7 +27,8 @@ endif
 NAME = minishell
 SRCS = ./srcs/main/main.c \
 		./srcs/parser/lexer.c \
-		./srcs/executor/builtins/echo.c ./srcs/executor/builtins/cd.c\
+		./srcs/executor/builtins/echo.c ./srcs/executor/builtins/echo_utils.c ./srcs/executor/builtins/cd.c ./srcs/executor/builtins/export.c\
+		./srcs/executor/builtins/export_utils.c \
 		./srcs/executor/executor.c ./srcs/parser/utils.c \
 		./srcs/utils/utils.c ./srcs/utils/find_path.c ./srcs/utils/shlvl.c\
 		./srcs/executor/pipes.c
@@ -28,7 +41,7 @@ ALL_SRCS = $(SRCS)
 OBJS = $(ALL_SRCS:.c=.o)
 
 CC = gcc
-CFLAGS = 
+CFLAGS =
 
 YELLOW = \033[0;33m
 GREEN = \033[0;32m

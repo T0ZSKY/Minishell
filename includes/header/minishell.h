@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/28 18:02:21 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/28 23:55:35 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct s_shell
 {
 	int is_running;
 	char **tab;
+	char **envp; //copie de envp que je vais utilisé pour les builtins genre la modifié et tout
 } t_shell;
 
 //include
@@ -43,5 +44,11 @@ void	increment_shell_level(void);
 void	exec_pipes(char **command, char **envp);
 void 	execute_child(char **args_copy, char **envp);
 int		is_complex(char *input);
+void	ft_export(char **tab, t_shell *shell);
+t_shell	*init_shell(char **envp);
+void print_clean_str(char *str, int has_next);
+int handle_n_flag(char **tab, int *j);
+char	**ft_copy_env(char **envp, int count);
+void	ft_sort_env(char **sorted_env, int count);
 
 #endif

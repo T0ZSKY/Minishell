@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:59:41 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/28 02:31:29 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/28 23:47:55 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,23 +99,6 @@ char *process_quotes(char *str)
 	}
 	result[j] = '\0';
 	return (result);
-}
-
-static void print_clean_str(char *str, int has_next)
-{
-	printf("%s", str);
-	if (has_next)
-		printf(" ");
-}
-
-static int handle_n_flag(char **tab, int *j)
-{
-	if (tab[1] && ft_strcmp(tab[1], "-n") == 0)
-	{
-		*j = 2;
-		return (1);
-	}
-	return (0);
 }
 
 void ft_echo(char **tab)

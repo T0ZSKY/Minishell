@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/28 18:07:48 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/28 23:44:25 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main(int argc, char **argv, char **envp)
 	if (argc && argv)
 		shell.is_running = 1;
 	increment_shell_level();
+	shell.envp = init_shell(envp)->envp;
 	while (shell.is_running)
 	{
 		input = readline("\033[31mminishell » \033[0m"); // entré de l'utilisateur
