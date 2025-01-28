@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/01/28 16:04:14 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:00:30 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_cmd_test(char *cmd, char **envp)
 	perror("execve");
 	free(path);
 	ft_free_tab(args);
-	exit(EXIT_FAILURE);
+	exit(1);
 }
 
 void	exec_pipes(char **command, char **envp)

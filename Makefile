@@ -28,7 +28,7 @@ ALL_SRCS = $(SRCS)
 OBJS = $(ALL_SRCS:.c=.o)
 
 CC = gcc
-CFLAGS =
+CFLAGS = 
 
 YELLOW = \033[0;33m
 GREEN = \033[0;32m

@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/28 11:52:25 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:07:48 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int main(int argc, char **argv, char **envp)
 {
-	int		i;
 	char	*input;
 	t_shell	shell;
 
-	shell.is_running = 1;
+	if (argc && argv)
+		shell.is_running = 1;
 	increment_shell_level();
 	while (shell.is_running)
 	{
