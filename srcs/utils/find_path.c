@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:26:36 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 23:54:08 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:56:42 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ char *check_absolute_or_relative_path(char *cmd)
 {
 	if (!cmd || !*cmd)
 		return (NULL);
-	if (cmd[0] == '/' || cmd[0] == '.') {
+	if (cmd[0] == '/' || cmd[0] == '.')
+	{
 		if (access(cmd, X_OK) == 0)
 			return (ft_strdup(cmd));
 		return (NULL);
@@ -46,10 +47,13 @@ char *search_command_in_dirs(char **dirs, char *cmd)
 	char *full_path;
 
 	i = 0;
-	while (dirs[i]) {
+	while (dirs[i])
+	{
 		full_path = join_path(dirs[i], cmd);
-		if (full_path) {
-			if (access(full_path, X_OK) == 0) {
+		if (full_path)
+		{
+			if (access(full_path, X_OK) == 0)
+			{
 				ft_free_tab(dirs);
 				return (full_path);
 			}

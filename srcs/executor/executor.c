@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:10:24 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 23:45:13 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:56:07 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ char **copy_arguments(char **tab)
 	while (tab[i])
 	{
 		args_copy[i] = ft_strdup(tab[i]);
-		if (!args_copy[i]) {
+		if (!args_copy[i])
+		{
 			ft_free_tab(args_copy);
 			return (NULL);
 		}
@@ -48,7 +49,8 @@ void execute_child(char **args_copy, char **envp)
 		ft_free_tab(args_copy);
 		exit(127);
 	}
-	if (execve(cmd_path, args_copy, envp) == -1) {
+	if (execve(cmd_path, args_copy, envp) == -1)
+	{
 		perror("execve");
 		free(cmd_path);
 		ft_free_tab(args_copy);
@@ -66,14 +68,17 @@ void ft_cmd(char **tab, char **envp)
 	if (!args_copy)
 		return;
 	pid = fork();
-	if (pid == -1) {
+	if (pid == -1)
+	{
 		perror("fork");
 		ft_free_tab(args_copy);
 		return;
 	}
-	if (pid == 0) {
+	if (pid == 0)
+	{
 		execute_child(args_copy, envp);
-	} else {
+	} else
+	{
 		ft_free_tab(args_copy);
 		waitpid(pid, NULL, 0);
 	}

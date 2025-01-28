@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/27 23:50:19 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/28 00:04:04 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char *find_command_path(char *cmd);
 char *join_path(char *dir, char *cmd);
 char **split_path(char *path);
 void ft_cd(char **tab);
+void increment_shell_level(void);
 
 
 #endif
