@@ -18,6 +18,7 @@ SRCS = ./srcs/main/main.c \
 		./srcs/executor/builtins/echo.c ./srcs/executor/builtins/cd.c\
 		./srcs/executor/executor.c ./srcs/parser/utils.c \
 		./srcs/utils/utils.c ./srcs/utils/find_path.c ./srcs/utils/shlvl.c\
+		./srcs/executor/pipes.c
 
 LIBFT_DIR = ./includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a

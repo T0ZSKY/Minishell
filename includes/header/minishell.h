@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/28 10:20:50 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:53:24 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ void	ft_cmd(char **tab, char **envp);
 void	ft_free_tab(char **tab);
 char	*find_command_path(char *cmd);
 char	*join_path(char *dir, char *cmd);
+char	*replace_pipes(char *cmd);
 char	**split_path(char *path);
 void	ft_cd(char **tab);
 void	increment_shell_level(void);
+void	exec_pipes(char **command, char **envp);
+void 	execute_child(char **args_copy, char **envp);
 int		is_complex(char *input);
 
 #endif
