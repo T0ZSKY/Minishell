@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 00:46:59 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:06:14 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ int main(int argc, char **argv, char **envp)
 		{
 			free(input);
 			printf("exit\n");
-			break ;
-		}
-		else if (ft_strcmp(input, "exit") == 0)
-		{
-			free(input);
-			shell.is_running = 0;
 			break ;
 		}
 		else// a faire regarder si il y a un pip ou une redirection pour l'envoyé dans une fonction fait expres genre ft_complex

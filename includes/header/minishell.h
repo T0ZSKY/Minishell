@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 14:36:22 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:09:49 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void	ft_sort_env(char **sorted_env, int count);
 void	ft_pwd(char **tab);
 void ft_ascii();
 void ft_env(char **tab, t_shell *shell);
+void ft_exit(t_shell *shell);
 
 #endif

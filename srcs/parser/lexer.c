@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 14:20:15 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:08:22 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	ft_lexer(char *input, t_shell *shell, char **envp)
 		ft_export(shell->tab, shell);
 	else if (ft_strcmp(shell->tab[0], "env") == 0)
 		ft_env(shell->tab, shell);
+	else if (ft_strcmp(shell->tab[0], "exit") == 0)
+		ft_exit(shell);
 	else if (is_complex(input)) // probleme avec les pip car je peux avoir un pip et un echo dans la meme ligne
 	{ //solution potientiel, chercher avec ft_strchr si il y a un pipe et géré le cas a part (voir commentaire dans le main)
 		free(new_input);
