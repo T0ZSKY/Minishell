@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 15:08:22 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:35:45 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	ft_lexer(char *input, t_shell *shell, char **envp)
 		return ;
 	new_input = replace_pipes(input); //need free
 	shell->tab = ft_split(new_input, ' ');
+	if (!shell->tab[0])
+		return ;
 	if (ft_strcmp(shell->tab[0], "echo") == 0)
 		ft_echo(shell->tab);
 	else if (ft_strcmp(shell->tab[0], "cd") == 0)
