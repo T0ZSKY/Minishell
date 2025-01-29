@@ -6,21 +6,11 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/01/28 18:00:30 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:30:01 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
-
-void	exec_commands(char *cmd, char **envp)
-{
-	char	**split;
-
-	split = ft_split(cmd, ' ');
-	execve(split[0], split, envp);
-	perror("execve");
-	exit(1);
-}
 
 void	ft_cmd_test(char *cmd, char **envp)
 {
@@ -77,7 +67,10 @@ void	exec_pipes(char **command, char **envp)
 				close(fd[1]);
 				close(fd[0]);
 			}
-			ft_cmd_test(command[i], envp);
+			if (ft_strcmp(command[i], "echo") == 0)
+				ft_echo(command);
+			else
+				ft_cmd_test(command[i], envp);
 		}
 		else
 		{
