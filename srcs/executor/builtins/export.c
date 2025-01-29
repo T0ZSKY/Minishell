@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 23:35:54 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/28 23:55:01 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/29 01:01:45 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_shell	*init_shell(char **envp) //IMPORTANT j'appelle dans le main pour faire l
 	i = 0;
 	while (i < count)
 	{
-		shell->envp[i] = strdup(envp[i]);
+		shell->envp[i] = ft_strdup(envp[i]);
 		i++;
 	}
 	shell->envp[count] = NULL;
@@ -49,10 +49,10 @@ static char	**ft_replace_env_var(char **envp, char *var)
 	i = 0;
 	while (envp[i])
 	{
-		if (strncmp(envp[i], var, len) == 0)
+		if (ft_strncmp(envp[i], var, len) == 0)
 		{
 			free(envp[i]);
-			envp[i] = strdup(var);
+			envp[i] = ft_strdup(var);
 			return (envp);
 		}
 		i++;
