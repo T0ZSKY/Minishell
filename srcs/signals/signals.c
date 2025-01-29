@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:13:02 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 15:14:41 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:23:51 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,3 @@ void ctrl_back_handler(int sig)
 	(void)sig;
 }
 
-void ctrl_d_handler(int sig)
-{
-	(void)sig;
-	exit(0);
-}
