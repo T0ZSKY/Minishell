@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 23:35:54 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 01:01:45 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:04:28 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	ft_print_env_sorted(char **envp)
 	i = 0;
 	while (sorted_env[i])
 	{
-		printf("-x %s\n", sorted_env[i]);
+		printf("declare -x %s\n", sorted_env[i]);
 		free(sorted_env[i]);
 		i++;
 	}
