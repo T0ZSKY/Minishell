@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 15:28:25 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:27:31 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int argc, char **argv, char **envp)
 	ft_ascii();
 	shell.envp = init_shell(envp)->envp;
 	signal(SIGINT, ctrl_c_handler);  // Ctrl-C
-	signal(SIGQUIT, ctrl_back_handler); // Ctrl-\-
+	signal(SIGQUIT, SIG_IGN);
 	while (shell.is_running)
 	{
 		input = readline("\033[31mminishell » \033[0m"); // entré de l'utilisateur
