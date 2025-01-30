@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 17:06:55 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:53:03 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ char	**skip_pipes(char **args)
 	return (args);
 }
 
-void	ft_lexer(char *input, t_shell *shell, char **envp)
+int		is_custom_cmd(char *s)
 {
-	char	*new_input;
-	char	**split;
+	if (!ft_strcmp(s, "echo") || !ft_strcmp(s, "cd") || !ft_strcmp(s, "pwd")
+		|| !ft_strcmp(s, "export") || !ft_strcmp(s, "env") || !ft_strcmp(s, "exit")
+		|| !ft_strcmp(s, "unset"))
+		return (1);
+	return (0);
+}
 
-	if (!input)
-		return ;
-	new_input = replace_pipes(input); //need free
-	shell->tab = ft_split(new_input, ' ');
-	if (!shell->tab[0])
-		return ;
+void	ft_custom_cmd(t_shell *shell)
+{
 	if (ft_strcmp(shell->tab[0], "echo") == 0)
 		ft_echo(shell->tab, shell->envp);
 	else if (ft_strcmp(shell->tab[0], "cd") == 0)
@@ -59,18 +59,34 @@ void	ft_lexer(char *input, t_shell *shell, char **envp)
 	else if (ft_strcmp(shell->tab[0], "exit") == 0)
 		ft_exit(shell);
 	else if (ft_strcmp(shell->tab[0], "unset") == 0)
-		ft_unset(shell->tab, shell);
-	else if (is_complex(input)) // probleme avec les pip car je peux avoir un pip et un echo dans la meme ligne
-	{ //solution potientiel, chercher avec ft_strchr si il y a un pipe et géré le cas a part (voir commentaire dans le main)
+		ft_unset(shell->tab, shell);	
+}
+
+void	ft_lexer(char *input, t_shell *shell, char **envp)
+{
+	char	*new_input;
+	char	**split;
+
+	if (!input)
+		return ;
+	new_input = replace_pipes(input); //need free
+	shell->tab = ft_split(new_input, ' ');
+	if (!shell->tab[0])
+		return ;
+	if (is_complex(input))
+	{
 		free(new_input);
 		new_input = ft_strdup(input);
 		split = ft_split(new_input, '|');
 		split = skip_pipes(split);
-		exec_pipes(split, envp);
-		//goto pipes
+		free(new_input);
+		exec_pipes(split, envp, shell);
 	}
 	else
 	{
-		ft_cmd(shell->tab, envp);
+		if (is_custom_cmd(new_input))
+			ft_custom_cmd(shell);
+		else
+			ft_cmd(shell->tab, envp);
 	}
 }

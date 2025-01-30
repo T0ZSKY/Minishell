@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 17:06:42 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:47:59 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_shell
 
 //declaration
 void	ft_lexer(char *input, t_shell *shell, char **envp);
-void ft_echo(char **tab, char **envp);
+void 	ft_echo(char **tab, char **envp);
 void	ft_cmd(char **tab, char **envp);
 void	ft_free_tab(char **tab);
 char	*find_command_path(char *cmd);
@@ -41,21 +41,23 @@ char	*replace_pipes(char *cmd);
 char	**split_path(char *path);
 void	ft_cd(char **tab);
 void	increment_shell_level(void);
-void	exec_pipes(char **command, char **envp);
+void	exec_pipes(char **command, char **envp, t_shell *shell);
 void 	execute_child(char **args_copy, char **envp);
 int		is_complex(char *input);
 void	ft_export(char **tab, t_shell *shell);
 t_shell	*init_shell(char **envp);
-void print_clean_str(char *str, int has_next);
-int handle_n_flag(char **tab, int *j);
+void 	print_clean_str(char *str, int has_next);
+int 	handle_n_flag(char **tab, int *j);
 char	**ft_copy_env(char **envp, int count);
 void	ft_sort_env(char **sorted_env, int count);
 void	ft_pwd(char **tab);
-void ft_ascii();
-void ft_env(char **tab, t_shell *shell);
-void ft_exit(t_shell *shell);
-void ctrl_c_handler(int sig);
-void ctrl_back_handler(int sig);
-void ft_unset(char **tab, t_shell *shell);
+void 	ft_ascii();
+void 	ft_env(char **tab, t_shell *shell);
+void 	ft_exit(t_shell *shell);
+void 	ctrl_c_handler(int sig);
+void 	ctrl_back_handler(int sig);
+void 	ft_unset(char **tab, t_shell *shell);
+int		is_custom_cmd(char *s);
+void	ft_custom_cmd(t_shell *shell);
 
 #endif

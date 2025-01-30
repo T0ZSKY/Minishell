@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/01/28 18:00:30 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:47:24 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
-
-void	exec_commands(char *cmd, char **envp)
-{
-	char	**split;
-
-	split = ft_split(cmd, ' ');
-	execve(split[0], split, envp);
-	perror("execve");
-	exit(1);
-}
 
 void	ft_cmd_test(char *cmd, char **envp)
 {
@@ -47,7 +37,7 @@ void	ft_cmd_test(char *cmd, char **envp)
 	exit(1);
 }
 
-void	exec_pipes(char **command, char **envp)
+void	exec_pipes(char **command, char **envp, t_shell *shell)
 {
 	int		i;
 	int		fd[2];
@@ -77,7 +67,10 @@ void	exec_pipes(char **command, char **envp)
 				close(fd[1]);
 				close(fd[0]);
 			}
-			ft_cmd_test(command[i], envp);
+			if (is_custom_cmd(command[i]))
+				ft_custom_cmd(shell);
+			else
+				ft_cmd_test(command[i], envp);
 		}
 		else
 		{
