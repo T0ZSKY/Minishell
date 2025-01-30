@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:13:02 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 15:28:03 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:21:08 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,3 @@ void ctrl_c_handler(int sig)
 	printf("\n");
 	rl_redisplay();
 }
-
-void	ctrl_back_handler(int sig)
-{
-	(void)sig;
-	write(1, "\b\b  \b\b", 6);
-}
-

@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/30 15:47:59 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:14:57 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_shell
 # include <sys/wait.h>
 
 //declaration
-void	ft_lexer(char *input, t_shell *shell, char **envp);
+void	ft_lexer(char *input, t_shell *shell);
 void 	ft_echo(char **tab, char **envp);
 void	ft_cmd(char **tab, char **envp);
 void	ft_free_tab(char **tab);
@@ -55,7 +55,6 @@ void 	ft_ascii();
 void 	ft_env(char **tab, t_shell *shell);
 void 	ft_exit(t_shell *shell);
 void 	ctrl_c_handler(int sig);
-void 	ctrl_back_handler(int sig);
 void 	ft_unset(char **tab, t_shell *shell);
 int		is_custom_cmd(char *s);
 void	ft_custom_cmd(t_shell *shell);
