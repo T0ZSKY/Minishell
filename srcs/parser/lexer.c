@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/30 17:44:12 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:26:02 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,27 @@ int		is_custom_cmd(char *s)
 		|| !ft_strcmp(s, "unset"))
 		return (1);
 	return (0);
+}
+
+void	ft_custom_cmd_args(char *cmd, t_shell *shell)
+{
+	shell->tab = ft_split(cmd, ' '); // Convertit `cmd` en tableau de mots
+	if (!shell->tab)
+		return ;
+	if (ft_strcmp(cmd, "echo") == 0)
+		ft_echo(shell->tab, shell->envp);
+	else if (ft_strcmp(cmd, "cd") == 0)
+		ft_cd(shell->tab);
+	else if (ft_strcmp(cmd, "pwd") == 0)
+		ft_pwd(shell->tab);
+	else if (ft_strcmp(cmd, "export") == 0)
+		ft_export(shell->tab, shell);
+	else if (ft_strcmp(cmd, "env") == 0)
+		ft_env(shell->tab, shell);
+	else if (ft_strcmp(cmd, "exit") == 0)
+		ft_exit(shell);
+	else if (ft_strcmp(cmd, "unset") == 0)
+		ft_unset(shell->tab, shell);
 }
 
 void	ft_custom_cmd(t_shell *shell)
