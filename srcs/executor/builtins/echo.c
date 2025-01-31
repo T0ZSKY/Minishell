@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:59:41 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:31:36 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:44:37 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void ft_echo(char **tab, char **envp)
 
 	j = 1;
 	flag = handle_n_flag(tab, &j);
-	while (tab[j])
+	while (tab[j] && !ft_strchr(tab[j], '|'))
 	{
 		clean = process_quotes(tab[j], envp);
 		if (!clean)
