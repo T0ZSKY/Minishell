@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
 /*   Updated: 2025/01/31 18:43:24 by taomalbe         ###   ########.fr       */
@@ -44,6 +44,27 @@ int		is_custom_cmd(char *s)
 	return (0);
 }
 
+void	ft_custom_cmd_args(char *cmd, t_shell *shell)
+{
+	shell->tab = ft_split(cmd, ' '); // Convertit `cmd` en tableau de mots
+	if (!shell->tab)
+		return ;
+	if (ft_strcmp(cmd, "echo") == 0)
+		ft_echo(shell->tab, shell->envp);
+	else if (ft_strcmp(cmd, "cd") == 0)
+		ft_cd(shell->tab);
+	else if (ft_strcmp(cmd, "pwd") == 0)
+		ft_pwd(shell->tab);
+	else if (ft_strcmp(cmd, "export") == 0)
+		ft_export(shell->tab, shell);
+	else if (ft_strcmp(cmd, "env") == 0)
+		ft_env(shell->tab, shell);
+	else if (ft_strcmp(cmd, "exit") == 0)
+		ft_exit(shell);
+	else if (ft_strcmp(cmd, "unset") == 0)
+		ft_unset(shell->tab, shell);
+}
+
 void	ft_custom_cmd(t_shell *shell)
 {
 	if (ft_strcmp(shell->tab[0], "echo") == 0)
@@ -59,7 +80,7 @@ void	ft_custom_cmd(t_shell *shell)
 	else if (ft_strcmp(shell->tab[0], "exit") == 0)
 		ft_exit(shell);
 	else if (ft_strcmp(shell->tab[0], "unset") == 0)
-		ft_unset(shell->tab, shell);	
+		ft_unset(shell->tab, shell);
 }
 
 //Attention split envoie un tableau de tableau rempli et donc export bug car !tab[1]

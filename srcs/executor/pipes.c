@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
 /*   Updated: 2025/01/31 18:41:57 by taomalbe         ###   ########.fr       */
