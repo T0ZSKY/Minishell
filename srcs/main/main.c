@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/30 14:41:49 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:01:52 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main(int argc, char **argv, char **envp)
 			break ;
 		}
 		else// a faire regarder si il y a un pip ou une redirection pour l'envoyé dans une fonction fait expres genre ft_complex
-			ft_lexer(input, &shell, envp);
+			ft_lexer(input, &shell);
 		if (shell.tab)
 			ft_free_tab(shell.tab);
 		add_history(input);

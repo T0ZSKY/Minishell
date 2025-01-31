@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:14:21 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:08:30 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_lexer(char *input, t_shell *shell)
 	}
 	else
 	{
-		if (is_custom_cmd(new_input))
+		if (is_custom_cmd(shell) == 0)
 			ft_custom_cmd(shell);
 		else
 			ft_cmd(shell->tab, shell->envp);
