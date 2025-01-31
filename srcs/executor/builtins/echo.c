@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:59:41 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 17:17:39 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:47:31 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void ft_echo(char **tab, char **envp)
 
 	j = 1;
 	flag = handle_n_flag(tab, &j);
-	while (tab[j])
+	while (tab[j] && !ft_strchr(tab[j], '|')) //probleme
 	{
 		clean = process_quotes(tab[j], envp);
 		if (!clean)

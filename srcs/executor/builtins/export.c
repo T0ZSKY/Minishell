@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 23:35:54 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 14:04:28 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:20:49 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	ft_export(char **tab, t_shell *shell)
 {
 	int	i;
 
-	if (!tab[1])
+	if (!tab[1] || tab[1][0] == '|')
 	{
 		ft_print_env_sorted(shell->envp);
 		return ;

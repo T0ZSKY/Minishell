@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/01/30 18:27:24 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:41:57 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,14 @@ void	exec_pipes(char **command, char **envp, t_shell *shell)
 				close(fd[1]);
 				close(fd[0]);
 			}
-			if (is_custom_cmd(command[i]) == 0)
+			if (is_custom_cmd(command[i]))
 			{
-				ft_custom_cmd_args(command[i], shell);
+				ft_custom_cmd(shell);
 				exit(0);
 			}
 			else
 				ft_cmd_test(command[i], envp);
+			exit(0);
 		}
 		else
 		{
