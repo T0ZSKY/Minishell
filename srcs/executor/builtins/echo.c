@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:59:41 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/31 18:47:31 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:59:32 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void ft_echo(char **tab, char **envp)
 
 	j = 1;
 	flag = handle_n_flag(tab, &j);
-	while (tab[j] && !ft_strchr(tab[j], '|')) //probleme
+	while (tab[j] && !ft_strchr(tab[j], '|')) // AHAH SOUCIS REGLE
 	{
 		clean = process_quotes(tab[j], envp);
 		if (!clean)
@@ -126,7 +126,7 @@ void ft_echo(char **tab, char **envp)
 			ft_putstr_fd("Error: Unclosed quotes\n", 2);
 			return ;
 		}
-		print_clean_str(clean, tab[j + 1] != NULL);
+	print_clean_str(clean, tab[j + 1] != NULL && ft_strcmp(tab[j + 1], "|") != 0);
 		free(clean);
 		j++;
 	}

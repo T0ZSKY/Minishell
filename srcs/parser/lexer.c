@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/04 14:57:34 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:00:44 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,23 @@ int		is_custom_cmd(char *s)
 
 void	ft_custom_cmd_args(char *cmd, t_shell *shell)
 {
-	shell->tab = ft_split(cmd, ' '); // Convertit `cmd` en tableau de mots
-	if (!shell->tab)
-		return ;
-	if (ft_strcmp(cmd, "echo") == 0)
-		ft_echo(shell->tab, shell->envp);
-	else if (ft_strcmp(cmd, "cd") == 0)
-		ft_cd(shell->tab);
-	else if (ft_strcmp(cmd, "pwd") == 0)
-		ft_pwd(shell->tab);
-	else if (ft_strcmp(cmd, "export") == 0)
-		ft_export(shell->tab, shell);
-	else if (ft_strcmp(cmd, "env") == 0)
-		ft_env(shell->tab, shell);
-	else if (ft_strcmp(cmd, "exit") == 0)
+	char **tab;
+
+	tab = ft_split(cmd, 32);
+	if (ft_strcmp(tab[0], "echo") == 0)
+		ft_echo(tab, shell->envp);
+	else if (ft_strcmp(tab[0], "cd") == 0)
+		ft_cd(tab);
+	else if (ft_strcmp(tab[0], "pwd") == 0)
+		ft_pwd(tab);
+	else if (ft_strcmp(tab[0], "export") == 0)
+		ft_export(tab, shell);
+	else if (ft_strcmp(tab[0], "env") == 0)
+		ft_env(tab, shell);
+	else if (ft_strcmp(tab[0], "exit") == 0)
 		ft_exit(shell);
-	else if (ft_strcmp(cmd, "unset") == 0)
-		ft_unset(shell->tab, shell);
+	else if (ft_strcmp(tab[0], "unset") == 0)
+		ft_unset(tab, shell);
 }
 
 void	ft_custom_cmd(t_shell *shell)
