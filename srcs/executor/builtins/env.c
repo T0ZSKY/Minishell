@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 15:13:02 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:21:08 by taomalbe         ###   ########.fr       */
+/*   Created: 2025/01/29 14:17:21 by tomlimon          #+#    #+#             */
+/*   Updated: 2025/01/29 14:53:53 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header/minishell.h"
+#include "../../../includes/header/minishell.h"
 
-void ctrl_c_handler(int sig)
+void	ft_env(char **tab, t_shell *shell)
 {
-	(void)sig;
-	rl_on_new_line();
-	printf("\n");
-	rl_redisplay();
+	int	i;
+
+	(void)tab;
+	i = 0;
+	while (shell->envp && shell->envp[i])
+	{
+		if (strchr(shell->envp[i], '='))
+			printf("%s\n", shell->envp[i]);
+		i++;
+	}
 }

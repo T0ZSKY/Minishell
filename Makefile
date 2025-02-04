@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/01/28 23:56:39 by tomlimon          #+#    #+#              #
+#    Updated: 2025/01/31 18:16:59 by taomalbe         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # Détection du système d'exploitation
 UNAME_S := $(shell uname -s)
 
@@ -15,20 +27,22 @@ endif
 NAME = minishell
 SRCS = ./srcs/main/main.c \
 		./srcs/parser/lexer.c \
-		./srcs/executor/builtins/echo.c ./srcs/executor/builtins/cd.c\
-		./srcs/executor/executor.c ./srcs/parser/utils.c \
-		./srcs/utils/utils.c ./srcs/utils/find_path.c ./srcs/utils/shlvl.c\
+		./srcs/executor/builtins/echo.c ./srcs/executor/builtins/echo_utils.c ./srcs/executor/builtins/cd.c ./srcs/executor/builtins/export.c\
+		./srcs/executor/builtins/export_utils.c ./srcs/executor/builtins/pwd.c ./srcs/executor/builtins/env.c\
+		./srcs/executor/builtins/exit.c ./srcs/executor/builtins/unset.c\
+		./srcs/executor/executor.c ./srcs/parser/utils.c\
+		./srcs/utils/utils.c ./srcs/utils/find_path.c ./srcs/utils/shlvl.c ./srcs/utils/ascii.c\
+		./srcs/signals/signals.c ./srcs/utils/splitfou.c\
 		./srcs/executor/pipes.c
 
 LIBFT_DIR = ./includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-ALL_SRCS = $(SRCS)
-
-OBJS = $(ALL_SRCS:.c=.o)
+OBJ_DIR = obj
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 CC = gcc
-CFLAGS = 
+CFLAGS =
 
 YELLOW = \033[0;33m
 GREEN = \033[0;32m
@@ -47,7 +61,8 @@ $(LIBFT):
 	@echo "$(YELLOW)🔨 Compiling libft... 🚀$(RESET)"
 	$(MAKE) -C $(LIBFT_DIR)
 
-%.o: %.c
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
 	@echo "$(YELLOW)📝 Compiling $<...$(RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(GREEN)✅ Compilation of $< finished$(RESET)"
@@ -55,7 +70,7 @@ $(LIBFT):
 # Cleaning rules
 clean:
 	@echo "$(RED)🧹 Cleaning object files...$(RESET)"
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 	@echo "$(RED)🧹 Cleaning libft objects...$(RESET)"
 	$(MAKE) clean -C $(LIBFT_DIR)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/01/29 17:30:01 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:41:57 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_cmd_test(char *cmd, char **envp)
 	exit(1);
 }
 
-void	exec_pipes(char **command, char **envp)
+void	exec_pipes(char **command, char **envp, t_shell *shell)
 {
 	int		i;
 	int		fd[2];
@@ -67,10 +67,14 @@ void	exec_pipes(char **command, char **envp)
 				close(fd[1]);
 				close(fd[0]);
 			}
-			if (ft_strcmp(command[i], "echo") == 0)
-				ft_echo(command);
+			if (is_custom_cmd(command[i]))
+			{
+				ft_custom_cmd(shell);
+				exit(0);
+			}
 			else
 				ft_cmd_test(command[i], envp);
+			exit(0);
 		}
 		else
 		{

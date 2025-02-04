@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 15:13:02 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:21:08 by taomalbe         ###   ########.fr       */
+/*   Created: 2025/01/29 16:45:46 by tomlimon          #+#    #+#             */
+/*   Updated: 2025/01/29 16:46:30 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header/minishell.h"
+#include "./libft.h"
 
-void ctrl_c_handler(int sig)
+int	ft_tablen(char **tab)
 {
-	(void)sig;
-	rl_on_new_line();
-	printf("\n");
-	rl_redisplay();
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

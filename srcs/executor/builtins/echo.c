@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:59:41 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/28 02:31:29 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:47:31 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/header/minishell.h"
 
-char	*expand_variable(char *str, int *index)
+char *expand_variable(char *str, int *index, char **envp)
 {
-	int		i;
-	int		len;
-	char	*var_name;
-	char	*value;
+	int     i;
+	int     len;
+	char    *var_name;
+	char    *value;
 
 	i = *index + 1;
 	len = 0;
@@ -30,7 +30,16 @@ char	*expand_variable(char *str, int *index)
 		return (NULL);
 	ft_strncpy(var_name, &str[i], len);
 	var_name[len] = '\0';
-	value = getenv(var_name);
+	value = NULL;
+	while (*envp)
+	{
+		if (ft_strncmp(*envp, var_name, len) == 0 && (*envp)[len] == '=')
+		{
+			value = ft_strchr(*envp, '=') + 1;
+			break;
+		}
+		envp++;
+	}
 	free(var_name);
 	*index = i + len;
 	if (!value)
@@ -38,7 +47,7 @@ char	*expand_variable(char *str, int *index)
 	return (ft_strdup(value));
 }
 
-static char *handle_quoted_content(char *str, int *i, int *j, char quote, char *result)
+static char *handle_quoted_content(char *str, int *i, int *j, char quote, char *result, char **envp)
 {
 	char *expanded;
 
@@ -47,7 +56,7 @@ static char *handle_quoted_content(char *str, int *i, int *j, char quote, char *
 	{
 		if (quote == '"' && str[*i] == '$')
 		{
-			expanded = expand_variable(str, i);
+			expanded = expand_variable(str, i, envp);
 			if (expanded)
 			{
 				ft_strcpy(&result[*j], expanded);
@@ -63,11 +72,11 @@ static char *handle_quoted_content(char *str, int *i, int *j, char quote, char *
 	return (result);
 }
 
-static char *handle_variable(char *str, int *i, int *j, char *result)
+static char *handle_variable(char *str, int *i, int *j, char *result, char **envp)
 {
 	char *expanded;
 
-	expanded = expand_variable(str, i);
+	expanded = expand_variable(str, i, envp);
 	if (expanded)
 	{
 		ft_strcpy(&result[*j], expanded);
@@ -77,7 +86,7 @@ static char *handle_variable(char *str, int *i, int *j, char *result)
 	return (result);
 }
 
-char *process_quotes(char *str)
+char *process_quotes(char *str, char **envp)
 {
 	int     i;
 	int     j;
@@ -91,9 +100,9 @@ char *process_quotes(char *str)
 	while (str[i])
 	{
 		if (str[i] == '\'' || str[i] == '"')
-			result = handle_quoted_content(str, &i, &j, str[i], result);
+			result = handle_quoted_content(str, &i, &j, str[i], result, envp);
 		else if (str[i] == '$')
-			result = handle_variable(str, &i, &j, result);
+			result = handle_variable(str, &i, &j, result, envp);
 		else
 			result[j++] = str[i++];
 	}
@@ -101,24 +110,7 @@ char *process_quotes(char *str)
 	return (result);
 }
 
-static void print_clean_str(char *str, int has_next)
-{
-	printf("%s", str);
-	if (has_next)
-		printf(" ");
-}
-
-static int handle_n_flag(char **tab, int *j)
-{
-	if (tab[1] && ft_strcmp(tab[1], "-n") == 0)
-	{
-		*j = 2;
-		return (1);
-	}
-	return (0);
-}
-
-void ft_echo(char **tab)
+void ft_echo(char **tab, char **envp)
 {
 	int     j;
 	int     flag;
@@ -126,9 +118,9 @@ void ft_echo(char **tab)
 
 	j = 1;
 	flag = handle_n_flag(tab, &j);
-	while (tab[j])
+	while (tab[j] && !ft_strchr(tab[j], '|')) //probleme
 	{
-		clean = process_quotes(tab[j]);
+		clean = process_quotes(tab[j], envp);
 		if (!clean)
 		{
 			ft_putstr_fd("Error: Unclosed quotes\n", 2);

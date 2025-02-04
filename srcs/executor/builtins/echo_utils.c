@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shlvl.c                                            :+:      :+:    :+:   */
+/*   echo2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 00:02:27 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 00:58:41 by tomlimon         ###   ########.fr       */
+/*   Created: 2025/01/28 23:47:35 by tomlimon          #+#    #+#             */
+/*   Updated: 2025/01/28 23:48:07 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header/minishell.h"
+#include "../../../includes/header/minishell.h"
 
-void	increment_shell_level(void)
+void print_clean_str(char *str, int has_next)
 {
-	char	*shlvl;
-	int		new_shlvl;
-	char	*new_shlvl_str;
+	printf("%s", str);
+	if (has_next)
+		printf(" ");
+}
 
-	shlvl = getenv("SHLVL");
-	new_shlvl = 1;
-	if (shlvl != NULL)
-		new_shlvl = ft_atoi(shlvl) + 1;
-
-	new_shlvl_str = ft_itoa(new_shlvl);
-	if (new_shlvl_str)
+int handle_n_flag(char **tab, int *j)
+{
+	if (tab[1] && ft_strcmp(tab[1], "-n") == 0)
 	{
-		setenv("SHLVL", new_shlvl_str, 1);
-		free(new_shlvl_str);
+		*j = 2;
+		return (1);
 	}
+	return (0);
 }
