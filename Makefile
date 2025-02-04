@@ -6,7 +6,7 @@
 #    By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 23:56:39 by tomlimon          #+#    #+#              #
-#    Updated: 2025/01/31 18:16:59 by taomalbe         ###   ########.fr        #
+#    Updated: 2025/02/04 16:11:31 by taomalbe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRCS = ./srcs/main/main.c \
 		./srcs/executor/executor.c ./srcs/parser/utils.c\
 		./srcs/utils/utils.c ./srcs/utils/find_path.c ./srcs/utils/shlvl.c ./srcs/utils/ascii.c\
 		./srcs/signals/signals.c ./srcs/utils/splitfou.c\
-		./srcs/executor/pipes.c
+		./srcs/executor/pipes.c ./srcs/executor/redirections.c 
 
 LIBFT_DIR = ./includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
