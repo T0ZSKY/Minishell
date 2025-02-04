@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/04 15:00:44 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:17:09 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,10 @@ void	ft_lexer(char *input, t_shell *shell)
 		return ;
 	if (is_complex(input))
 	{
-		//free(new_input);
-		new_input = ft_strdup(new_input);
 		split = ft_split(new_input, '|');
 		split = skip_pipes(split);
 		free(new_input);
+		//redirection pas prise en compte faire une fonction qui les prends en compte avant d'exec pipes
 		exec_pipes(split, shell->envp, shell);
 	}
 	else

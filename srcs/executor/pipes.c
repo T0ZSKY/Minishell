@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/04 16:31:39 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:04:02 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	exec_pipes(char **command, char **envp, t_shell *shell)
 			shell->tab = command;
 			if (is_custom_cmd(command[i]))
 			{
-				ft_custom_cmd(shell);
+				ft_custom_cmd_args(shell);
 				exit(0);
 			}
 			else

@@ -6,7 +6,7 @@
 #    By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 23:56:39 by tomlimon          #+#    #+#              #
-#    Updated: 2025/02/04 16:11:31 by taomalbe         ###   ########.fr        #
+#    Updated: 2025/02/04 17:44:42 by taomalbe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ OBJ_DIR = obj
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 CC = gcc
-CFLAGS =
+CFLAGS = -Wall -Wextra -Werror
 
 YELLOW = \033[0;33m
 GREEN = \033[0;32m
