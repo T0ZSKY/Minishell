@@ -60,7 +60,7 @@ void 	ft_unset(char **tab, t_shell *shell);
 int		is_custom_cmd(char *s);
 void	ft_custom_cmd(t_shell *shell);
 char	**ft_splitfou(char *str);
-
+void	ft_custom_cmd_args(char *cmd, t_shell *shell);
 void	redirections(char **command);
 
 #endif

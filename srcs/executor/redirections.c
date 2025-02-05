@@ -44,7 +44,6 @@ void	redirections(char **command)
 	int	fd;
 
 	i = 0;
-	printf("%s\n", command[i + 1]);
 	while (command[i + 1])
 	{
 		if (ft_strcmp(command[i], ">") == 0)

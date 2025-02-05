@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/05 11:45:36 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:11:17 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	exec_pipes(char **command, char **envp, t_shell *shell)
 	int		i;
 	int		fd[2];
 	int		prev_pipe;
+	char	**redir;
 	pid_t	pid;
 
 	i = 0;
@@ -67,15 +68,23 @@ void	exec_pipes(char **command, char **envp, t_shell *shell)
 				close(fd[1]);
 				close(fd[0]);
 			}
-			if (is_custom_cmd(command[i]))
+			if (is_complex(command[i]))
 			{
-				ft_custom_cmd(shell);
+				redir = ft_split(command[i], ' ');
+				redirections(redir);
+				if (is_custom_cmd(redir[0]))
+					ft_custom_cmd_args(redir[0], shell);
+				else
+					ft_cmd_test(redir[0], envp);
+				exit(0);
+			}
+			else if (is_custom_cmd(command[i]))
+			{
+				ft_custom_cmd_args(command[i], shell);
 				exit(0);
 			}
 			else
-			{
 				ft_cmd_test(command[i], envp);
-			}
 			exit(0);
 		}
 		else

@@ -100,8 +100,6 @@ void	ft_lexer(char *input, t_shell *shell)
 	{
 		split = ft_split(new_input, '|');
 		free(new_input);
-		
-		//redirection pas prise en compte faire une fonction qui les prends en compte avant d'exec pipes
 		exec_pipes(split, shell->envp, shell);
 	}
 	else
