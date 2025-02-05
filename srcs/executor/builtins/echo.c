@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:59:41 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/31 21:43:19 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:52:12 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,17 @@ char *expand_variable(char *str, int *index, char **envp)
 	int     i;
 	int     len;
 	char    *var_name;
+	char *status_str;
 	char    *value;
 
 	i = *index + 1;
 	len = 0;
+	if (str[*index + 1] == '?')
+    {
+        status_str = ft_itoa(g_last_exit_status);
+        *index += 2;
+        return status_str;
+    }
 	while (str[i + len] && (ft_isalnum(str[i + len]) || str[i + len] == '_'))
 		len++;
 	if (len == 0)
@@ -132,4 +139,5 @@ void ft_echo(char **tab, char **envp)
 	}
 	if (flag == 0)
 		printf("\n");
+	g_last_exit_status = 0;
 }

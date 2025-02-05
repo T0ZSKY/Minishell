@@ -3,19 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/31 16:01:52 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:48:57 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
 
+	int g_last_exit_status = 0;
+
 int main(int argc, char **argv, char **envp)
 {
 	char	*input;
 	int i;
+
 	t_shell	shell;
 
 	i = 0;

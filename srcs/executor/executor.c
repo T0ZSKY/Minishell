@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:10:24 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/28 13:43:25 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:05:49 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,47 +40,56 @@ char **copy_arguments(char **tab)
 
 void execute_child(char **args_copy, char **envp)
 {
-	char *cmd_path;
+    char *cmd_path;
 
-	cmd_path = find_command_path(args_copy[0]);
-	if (!cmd_path)
-	{
-		printf("%s: command not found\n", args_copy[0]);
-		ft_free_tab(args_copy);
-		exit(127);
-	}
-	if (execve(cmd_path, args_copy, envp) == -1)
-	{
-		perror("execve");
-		free(cmd_path);
-		ft_free_tab(args_copy);
-		exit(126);
-	}
-	free(cmd_path);
+    cmd_path = find_command_path(args_copy[0]);
+    if (!cmd_path)
+    {
+        printf("%s: command not found\n", args_copy[0]);
+        ft_free_tab(args_copy);
+        exit(127);
+    }
+    if (execve(cmd_path, args_copy, envp) == -1)
+    {
+        perror("execve");
+        free(cmd_path);
+        ft_free_tab(args_copy);
+        exit(126);
+    }
+    free(cmd_path);
 }
 
 void ft_cmd(char **tab, char **envp)
 {
-	pid_t pid;
-	char **args_copy;
+    pid_t pid;
+    char **args_copy;
+    int status;
 
-	args_copy = copy_arguments(tab);
-	if (!args_copy)
-		return;
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork");
-		ft_free_tab(args_copy);
-		return ;
-	}
-	if (pid == 0)
-	{
-		execute_child(args_copy, envp);
-	}
-	else
-	{
-		ft_free_tab(args_copy);
-		waitpid(pid, NULL, 0);
-	}
+    args_copy = copy_arguments(tab);
+    if (!args_copy)
+        return;
+
+    pid = fork();
+    if (pid == -1)
+    {
+        perror("fork");
+        ft_free_tab(args_copy);
+        g_last_exit_status = 1;
+        return;
+    }
+
+    if (pid == 0)
+    {
+        execute_child(args_copy, envp);
+    }
+    else
+    {
+        ft_free_tab(args_copy);
+        waitpid(pid, &status, 0);
+        
+        if (WIFEXITED(status))
+            g_last_exit_status = WEXITSTATUS(status);
+        else
+            g_last_exit_status = 1;
+    }
 }

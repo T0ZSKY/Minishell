@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/31 21:45:09 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:47:46 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ typedef struct s_shell
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+
+//SEULE VARIABLE GLOBALE OBLIGATOIRE POUR SIGNAL
+extern int g_last_exit_status;
+
 
 //declaration
 void	ft_lexer(char *input, t_shell *shell);
