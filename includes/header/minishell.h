@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/06 09:26:47 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:07:57 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ void	ft_custom_cmd(t_shell *shell);
 char	**ft_splitfou(char *str);
 void	ft_custom_cmd_args(char *cmd, t_shell *shell);
 void	redirections(char **command);
+int		heredoc(char *limiter);
 
 #endif

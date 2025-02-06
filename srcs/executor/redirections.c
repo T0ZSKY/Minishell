@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:36:08 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/04 18:16:22 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:12:52 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	redirections(char **command)
 		{
 			fd = open(command[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			if (fd == -1)
-				perror("open");
+				return (perror(command[i + 1]), exit(1));
 			dup2(fd, STDOUT_FILENO);
 			close(fd);
 			command[i] = NULL;
@@ -59,7 +59,7 @@ void	redirections(char **command)
 		{
 			fd = open(command[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
 			if (fd == -1)
-				perror("open");
+				return (perror(command[i + 1]), exit(1));
 			dup2(fd, STDOUT_FILENO);
 			close(fd);
 			command[i] = NULL;
@@ -68,7 +68,7 @@ void	redirections(char **command)
 		{
 			fd = open(command[i + 1], O_RDONLY);
 			if (fd == -1)
-				perror("open");
+				return (perror(command[i + 1]), exit(1));
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 			command[i] = NULL;
@@ -77,7 +77,7 @@ void	redirections(char **command)
 		{
 			fd = heredoc(command[i + 1]);
 			if (fd == -1)
-				perror("heredoc");
+				return (perror("heredoc"), exit(1));
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 			command[i] = NULL;
