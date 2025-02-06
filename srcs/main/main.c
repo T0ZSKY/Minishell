@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/05 15:48:57 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:47:53 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,10 @@ int main(int argc, char **argv, char **envp)
 	clear_history();
 	if (shell.envp)
 	{
-		while (shell.envp[i])  // Parcourir sans modifier le pointeur original
-		{
-			free(shell.envp[i]);
-			i++;
-		}
-		free(shell.envp);
+    	i = 0;
+    	while (shell.envp[i])
+        	free(shell.envp[i++]);
+    	free(shell.envp);
 	}
+
 }
