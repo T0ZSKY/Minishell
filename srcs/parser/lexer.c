@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/06 09:26:26 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:36:36 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,48 @@ int		is_custom_cmd(char *s)
 	return (0);
 }
 
-void	ft_custom_cmd_args(char *cmd, t_shell *shell)
+int	ft_custom_cmd_args(char *cmd, t_shell *shell)
 {
 	char **tab;
 
 	tab = ft_split(cmd, 32);
 	if (ft_strcmp(tab[0], "echo") == 0)
+	{
 		ft_echo(tab, shell->envp);
+		return (0);
+	}
 	else if (ft_strcmp(tab[0], "cd") == 0)
+	{
 		ft_cd(tab);
+		return (0);	
+	}
 	else if (ft_strcmp(tab[0], "pwd") == 0)
+	{
 		ft_pwd(tab);
+		return (0);
+	}
 	else if (ft_strcmp(tab[0], "export") == 0)
+	{
 		ft_export(tab, shell);
+		return (0);
+	}
 	else if (ft_strcmp(tab[0], "env") == 0)
+	{
 		ft_env(tab, shell);
+		return (0);
+	}
 	else if (ft_strcmp(tab[0], "exit") == 0)
+	{
 		ft_exit(shell);
+		return (0);
+	}
 	else if (ft_strcmp(tab[0], "unset") == 0)
+	{
 		ft_unset(tab, shell);
+		return (0);
+	}
+	else
+		return (1);
 }
 
 void	ft_custom_cmd(t_shell *shell)

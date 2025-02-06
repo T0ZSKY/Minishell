@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/06 12:38:23 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:46:20 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,65 +37,78 @@ void	ft_cmd_test(char *cmd, char **envp)
 	exit(1);
 }
 
+void	exec_child(char *cmd, int prev_pipe, int fd[2], char **envp, t_shell *shell)
+{
+	char	**redir;
+
+	if (prev_pipe != -1)
+	{
+		dup2(prev_pipe, STDIN_FILENO);
+		close(prev_pipe);
+	}
+	if (fd[1] != -1)
+	{
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+		close(fd[0]);
+	}
+	if (is_complex(cmd))
+	{
+		redir = ft_split(cmd, ' ');
+		redirections(redir);
+		if (is_custom_cmd(redir[0]))
+			ft_custom_cmd_args(redir[0], shell);
+		else
+			ft_cmd_test(redir[0], envp);
+		exit(0);
+	}
+	else if (is_custom_cmd(cmd))
+	{
+		if (ft_custom_cmd_args(cmd, shell) == 1)
+		{
+			printf("command not find : %s\n", shell->tab[0]);
+			exit (127);
+		}
+		exit(0);
+	}
+	ft_cmd_test(cmd, envp);
+	exit(1);
+}
+
 void	exec_pipes(char **command, char **envp, t_shell *shell)
 {
 	int		i;
 	int		fd[2];
 	int		prev_pipe;
-	char	**redir;
 	pid_t	pid;
+	int		status;
+	pid_t	pids[1024];
 
 	i = 0;
 	prev_pipe = -1;
 	while (command[i])
 	{
-		if (command[i + 1])
-		{
-			if (pipe(fd) == -1)
-				return (perror("pipes"));
-		}
+		fd[0] = -1;
+		fd[1] = -1;
+		if (command[i + 1] != NULL && pipe(fd) == -1)
+			return (perror("pipe"));
 		pid = fork();
+		if (pid == -1)
+			return (perror("fork"));
 		if (pid == 0)
-		{
-			if (prev_pipe != -1)
-			{
-				dup2(prev_pipe, STDIN_FILENO);
-				close(prev_pipe);
-			}
-			if (command[i + 1])
-			{
-				dup2(fd[1], STDOUT_FILENO);
-				close(fd[1]);
-				close(fd[0]);
-			}
-			if (is_complex(command[i]))
-			{
-				redir = ft_split(command[i], ' ');
-				redirections(redir);
-				if (is_custom_cmd(redir[0]))
-					ft_custom_cmd_args(redir[0], shell);
-				else
-					ft_cmd_test(redir[0], envp);
-				exit(0);
-			}
-			else if (is_custom_cmd(command[i]))
-			{
-				ft_custom_cmd_args(command[i], shell);
-				exit(0);
-			}
-			else
-				ft_cmd_test(command[i], envp);
-			exit(0);
-		}
-		else
-		{
-			if (prev_pipe != -1)
-				close(prev_pipe);
-			if (command[i + 1])
-				close(fd[1]);
-			prev_pipe = fd[0];
-			waitpid(pid, NULL, 0);
-		}
+			exec_child(command[i], prev_pipe, fd, envp, shell);
+		pids[i] = pid;
+		if (prev_pipe != -1)
+			close(prev_pipe);
+		if (command[i + 1] != NULL)
+			close(fd[1]);
+		prev_pipe = fd[0];
+		i++;
+	}
+	i = 0;
+	while (i < 1024 && pids[i])
+	{
+		waitpid(pids[i], &status, 0);
 		i++;
 	}
 }
