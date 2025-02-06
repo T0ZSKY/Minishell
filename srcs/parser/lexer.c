@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/06 16:04:18 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:28:38 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,7 @@ int	ft_custom_cmd_args(char *cmd, t_shell *shell)
 		return (0);
 	}
 	else
-	{
-		printf("command not find : %s\n", shell->tab[0]);
-		g_last_exit_status = 126;
 		return (1);
-	}
 }
 
 void	ft_custom_cmd(t_shell *shell)
@@ -108,11 +104,6 @@ void	ft_custom_cmd(t_shell *shell)
 		ft_exit(shell);
 	else if (ft_strcmp(shell->tab[0], "unset") == 0)
 		ft_unset(shell->tab, shell);
-	else
-	{
-		printf("command not find : %s\n", shell->tab[0]);
-		g_last_exit_status = 126;
-	}
 }
 
 //Attention split envoie un tableau de tableau rempli et donc export bug car !tab[1]

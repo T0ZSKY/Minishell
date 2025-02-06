@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/06 16:14:37 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:21:38 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	exec_child(char *cmd, int prev_pipe, int fd[2], char **envp, t_shell *shell
 	{
 		if (ft_custom_cmd_args(cmd, shell) == 1)
 		{
-			exit(127);
+			printf("command not find : %s\n", shell->tab[0]);
+			exit (127);
 		}
 		exit(0);
 	}
