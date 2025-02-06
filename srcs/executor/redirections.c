@@ -6,13 +6,14 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:36:08 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/06 12:12:52 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:47:55 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
 
-int	heredoc(char *limiter)
+//sacre here_doc pas gentil
+int heredoc(char *limiter)
 {
 	int		fd[2];
 	char	*line;
@@ -37,6 +38,7 @@ int	heredoc(char *limiter)
 	close(fd[1]);
 	return (fd[0]);
 }
+
 
 void	redirections(char **command)
 {
