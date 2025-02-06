@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/06 16:09:35 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:32:35 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ extern int g_last_exit_status;
 //declaration
 void	ft_lexer(char *input, t_shell *shell);
 void 	ft_echo(char **tab, char **envp);
-void	ft_cmd(char **tab, char **envp);
+void ft_cmd(char **tab, char **envp, t_shell *shell);
 void	ft_free_tab(char **tab);
 char	*find_command_path(char *cmd);
 char	*join_path(char *dir, char *cmd);
 char	*replace_pipes(char *cmd);
 char	**split_path(char *path);
-void	ft_cd(char **tab);
+void ft_cd(char **tab, t_shell *shell);
 void	increment_shell_level(void);
 void	exec_pipes(char **command, char **envp, t_shell *shell);
 void 	execute_child(char **args_copy, char **envp);
