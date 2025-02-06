@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 00:35:45 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/05 15:52:49 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:21:39 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_pwd(char **tab)
 	char	*cwd;
 
 	g_last_exit_status = 1;
-	if (tab && tab[0] && (!tab[1] || tab[1][0] == '|'))
+	if (tab && (tab[0] || tab[1][0] == '|'))
 	{
 		cwd = get_current_directory();
 		if (cwd)

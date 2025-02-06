@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/06 09:27:02 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:20:40 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,9 @@ int main(int argc, char **argv, char **envp)
 	clear_history();
 	if (shell.envp)
 	{
-		while (shell.envp[i])  // Parcourir sans modifier le pointeur original
-		{
-			free(shell.envp[i]);
-			i++;
-		}
-		free(shell.envp);
+    	i = 0;
+    	while (shell.envp[i])
+        	free(shell.envp[i++]);
+    	free(shell.envp);
 	}
 }
