@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/06 15:49:24 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:14:37 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	ft_cmd_test(char *cmd, char **envp)
 
 void	exec_child(char *cmd, int prev_pipe, int fd[2], char **envp, t_shell *shell)
 {
-	char	**redir;
-
 	if (prev_pipe != -1)
 	{
 		dup2(prev_pipe, STDIN_FILENO);
@@ -53,11 +51,18 @@ void	exec_child(char *cmd, int prev_pipe, int fd[2], char **envp, t_shell *shell
 		close(fd[0]);
 	}
 	if (is_custom_cmd(cmd))
-		ft_custom_cmd_args(cmd, shell);
-	else
-		ft_cmd_test(cmd, envp);
+	{
+		if (ft_custom_cmd_args(cmd, shell) == 1)
+		{
+			exit(127);
+		}
+		exit(0);
+	}
+	ft_cmd_test(cmd, envp);
 	exit(1);
 }
+
+
 
 void	exec_pipes(char **command, char **envp, t_shell *shell)
 {

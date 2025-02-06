@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/05 15:47:46 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:09:35 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_shell
 # include <readline/history.h>
 # include "../../includes/libft/libft.h"
 # include <unistd.h>
+# include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 
@@ -63,6 +64,6 @@ void 	ft_unset(char **tab, t_shell *shell);
 int		is_custom_cmd(char *s);
 void	ft_custom_cmd(t_shell *shell);
 char	**ft_splitfou(char *str);
-void	ft_custom_cmd_args(char *cmd, t_shell *shell);
+int	ft_custom_cmd_args(char *cmd, t_shell *shell);
 
 #endif
