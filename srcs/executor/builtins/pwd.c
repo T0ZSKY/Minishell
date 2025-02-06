@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 00:35:45 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/31 17:23:47 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:52:49 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_pwd(char **tab)
 {
 	char	*cwd;
 
+	g_last_exit_status = 1;
 	if (tab && tab[0] && (!tab[1] || tab[1][0] == '|'))
 	{
 		cwd = get_current_directory();
@@ -50,6 +51,7 @@ void	ft_pwd(char **tab)
 			write(1, cwd, strlen(cwd));
 			write(1, "\n", 1);
 			free(cwd);
+			g_last_exit_status = 0;
 		}
 	}
 	else

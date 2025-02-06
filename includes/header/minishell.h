@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/04 16:08:54 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/06 09:26:47 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ typedef struct s_shell
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+
+//SEULE VARIABLE GLOBALE OBLIGATOIRE POUR SIGNAL
+extern int g_last_exit_status;
+
 
 //declaration
 void	ft_lexer(char *input, t_shell *shell);
