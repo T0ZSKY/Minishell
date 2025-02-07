@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:10:24 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/05 16:05:49 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:35:59 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,32 @@ void execute_child(char **args_copy, char **envp)
     free(cmd_path);
 }
 
-void ft_cmd(char **tab, char **envp)
+void ft_cmd(char **tab, char **envp, t_shell *shell)
 {
     pid_t pid;
     char **args_copy;
     int status;
+    int i;
+    int path_found;
+    
+    i = 0;
+    path_found = 0;
+    while (shell->envp[i]) 
+    {
+        if (ft_strncmp(shell->envp[i], "PATH=", 5) == 0) 
+        {
+            path_found = 1;
+            break;
+        }
+        i++;
+    }
 
+    if (!path_found) 
+    {
+        printf("minishell: %s: No such file or directory\n", tab[0]);
+        g_last_exit_status = 127;
+        return;
+    }
     args_copy = copy_arguments(tab);
     if (!args_copy)
         return;

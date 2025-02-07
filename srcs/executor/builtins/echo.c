@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:59:41 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/06 09:27:28 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/07 09:28:55 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,33 @@ static char *handle_quoted_content(char *str, int *i, int *j, char quote, char *
 
 static char *handle_variable(char *str, int *i, int *j, char *result, char **envp)
 {
-	char *expanded;
+    char *expanded;
+    int new_len;
+    char *temp_result;
 
-	expanded = expand_variable(str, i, envp);
-	if (expanded)
-	{
-		ft_strcpy(&result[*j], expanded);
-		*j += ft_strlen(expanded);
-		free(expanded);
-	}
-	return (result);
+    expanded = expand_variable(str, i, envp);
+    if (expanded)
+    {
+        new_len = *j + ft_strlen(expanded) + 1;
+
+        temp_result = malloc(sizeof(char) * new_len);
+        if (!temp_result)
+        {
+            ft_putstr_fd("Error: Memory allocation failed\n", 2);
+            free(result);
+            return NULL;
+        }
+
+        ft_strcpy(temp_result, result);
+        free(result); 
+        ft_strcpy(&temp_result[*j], expanded);
+        *j += ft_strlen(expanded);
+        free(expanded);
+        return temp_result;
+    }
+    return result;
 }
+
 
 char *process_quotes(char *str, char **envp)
 {

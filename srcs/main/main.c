@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/06 17:20:40 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/07 09:28:43 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int main(int argc, char **argv, char **envp)
 	shell.envp = init_shell(envp)->envp;
 	signal(SIGINT, ctrl_c_handler);  // Ctrl-C
 	signal(SIGQUIT, SIG_IGN); //
+	signal(SIGTSTP, SIG_IGN);
 	while (shell.is_running)
 	{
 		input = readline("\033[31mminishell » \033[0m"); // entré de l'utilisateur

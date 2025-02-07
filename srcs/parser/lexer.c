@@ -6,7 +6,11 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/02/06 16:36:36 by taomalbe         ###   ########.fr       */
+=======
+/*   Updated: 2025/02/06 17:32:50 by tomlimon         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +60,7 @@ int	ft_custom_cmd_args(char *cmd, t_shell *shell)
 	}
 	else if (ft_strcmp(tab[0], "cd") == 0)
 	{
-		ft_cd(tab);
+		ft_cd(tab, shell);
 		return (0);	
 	}
 	else if (ft_strcmp(tab[0], "pwd") == 0)
@@ -93,7 +97,7 @@ void	ft_custom_cmd(t_shell *shell)
 	if (ft_strcmp(shell->tab[0], "echo") == 0)
 		ft_echo(shell->tab, shell->envp);
 	else if (ft_strcmp(shell->tab[0], "cd") == 0)
-		ft_cd(shell->tab);
+		ft_cd(shell->tab, shell);
 	else if (ft_strcmp(shell->tab[0], "pwd") == 0)
 		ft_pwd(shell->tab);
 	else if (ft_strcmp(shell->tab[0], "export") == 0)
@@ -130,6 +134,6 @@ void	ft_lexer(char *input, t_shell *shell)
 		if (is_custom_cmd(shell->tab[0]) == 1)
 			ft_custom_cmd(shell);
 		else
-			ft_cmd(shell->tab, shell->envp);
+			ft_cmd(shell->tab, shell->envp, shell);
 	}
 }
