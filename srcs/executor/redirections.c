@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:36:08 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/07 15:17:12 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:45:39 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	redirections(char *cmd)
 
 void	null_complex(char **redir)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (redir[i])

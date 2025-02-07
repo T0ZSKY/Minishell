@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/07 15:17:15 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:45:31 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,26 @@ void	ft_cmd_test(char *cmd, char **envp)
 
 void	exec_child(char *cmd, int prev_pipe, int fd[2], char **envp, t_shell *shell)
 {
-	if (prev_pipe != -1)
+	int		i;
+	int		heredoc_fd;
+	char	**split_cmd;
+
+	i = 0;
+	heredoc_fd = -1;
+	if (is_complex(cmd) && ft_strnstr(cmd, "<<", ft_strlen(cmd)))
+	{
+		split_cmd = ft_split(cmd, ' ');
+		while (ft_strcmp(split_cmd[i], "<<") && split_cmd[i])
+			i++;
+		heredoc_fd = heredoc(split_cmd[i + 1]);
+		ft_free_tab(split_cmd);
+	}
+	if (heredoc_fd != -1)
+	{
+		dup2(heredoc_fd, STDIN_FILENO);
+		close(heredoc_fd);
+	}
+	else if (prev_pipe != -1)
 	{
 		dup2(prev_pipe, STDIN_FILENO);
 		close(prev_pipe);
@@ -53,10 +72,9 @@ void	exec_child(char *cmd, int prev_pipe, int fd[2], char **envp, t_shell *shell
 		close(fd[1]);
 		close(fd[0]);
 	}
-	if (is_complex(cmd))
+	if (is_complex(cmd) && !ft_strnstr(cmd, "<<", ft_strlen(cmd)))
 	{
 		redirections(cmd);
-		//redir[0] = join_cmd(redir);
 		if (is_custom_cmd(cmd))
 			ft_custom_cmd_args(cmd, shell);
 		else
@@ -75,6 +93,7 @@ void	exec_child(char *cmd, int prev_pipe, int fd[2], char **envp, t_shell *shell
 	ft_cmd_test(cmd, envp);
 	exit(1);
 }
+
 
 void	exec_pipes(char **command, char **envp, t_shell *shell)
 {
