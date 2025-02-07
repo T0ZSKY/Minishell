@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:36:08 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/06 12:47:55 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/06 19:24:58 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int heredoc(char *limiter)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strncmp(limiter, line, ft_strlen(limiter)) == 0)
+		if (!line || ft_strcmp(limiter, line) == 0)
 		{
 			free(line);
 			break ;
