@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/07 15:38:50 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:43:24 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,18 @@ void	ft_cmd_test(char *cmd, char **envp)
 
 void	exec_child(char *cmd, int prev_pipe, int fd[2], char **envp, t_shell *shell)
 {
+	int		i;
 	int		heredoc_fd;
 	char	**split_cmd;
 
+	i = 0;
 	heredoc_fd = -1;
 	if (is_complex(cmd) && ft_strnstr(cmd, "<<", ft_strlen(cmd)))
 	{
 		split_cmd = ft_split(cmd, ' ');
-		heredoc_fd = heredoc(split_cmd[2]);
+		while (ft_strcmp(split_cmd[i], "<<") && split_cmd[i])
+			i++;
+		heredoc_fd = heredoc(split_cmd[i + 1]);
 		ft_free_tab(split_cmd);
 	}
 	if (heredoc_fd != -1)
