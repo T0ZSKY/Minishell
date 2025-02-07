@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/07 14:59:02 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:13:56 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int	ft_custom_cmd_args(char *cmd, t_shell *shell)
 {
 	char **tab;
 
-	tab = ft_split(cmd, 32);
+	tab = ft_split(cmd, ' ');
+	if (is_complex(cmd))
+		null_complex(tab);
+	free(cmd);
 	if (ft_strcmp(tab[0], "echo") == 0)
 	{
 		ft_echo(tab, shell->envp);
