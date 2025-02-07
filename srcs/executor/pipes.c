@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/07 09:28:37 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:55:17 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	ft_cmd_test(char *cmd, char **envp)
 		perror("ft_split");
 		exit(1);
 	}
+	if (is_complex(cmd))
+		null_complex(args);
+	free(cmd);
 	path = find_command_path(args[0]);
 	if (!path)
 	{
@@ -39,8 +42,6 @@ void	ft_cmd_test(char *cmd, char **envp)
 
 void	exec_child(char *cmd, int prev_pipe, int fd[2], char **envp, t_shell *shell)
 {
-	char	**redir;
-
 	if (prev_pipe != -1)
 	{
 		dup2(prev_pipe, STDIN_FILENO);
@@ -54,12 +55,12 @@ void	exec_child(char *cmd, int prev_pipe, int fd[2], char **envp, t_shell *shell
 	}
 	if (is_complex(cmd))
 	{
-		redir = ft_split(cmd, ' ');
-		redirections(redir);
-		if (is_custom_cmd(redir[0]))
-			ft_custom_cmd_args(redir[0], shell);
+		redirections(cmd);
+		//redir[0] = join_cmd(redir);
+		if (is_custom_cmd(cmd))
+			ft_custom_cmd_args(cmd, shell);
 		else
-			ft_cmd_test(redir[0], envp);
+			ft_cmd_test(cmd, envp);
 		exit(0);
 	}
 	else if (is_custom_cmd(cmd))

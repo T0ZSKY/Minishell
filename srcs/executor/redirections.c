@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:36:08 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/06 19:24:58 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:54:57 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ int heredoc(char *limiter)
 }
 
 
-void	redirections(char **command)
+void	redirections(char *cmd)
 {
-	int	i;
-	int	fd;
+	int		i;
+	int		fd;
+	char	**command;
 
 	i = 0;
+	command = ft_split(cmd, ' ');
 	while (command[i + 1])
 	{
 		if (ft_strcmp(command[i], ">") == 0)
@@ -55,7 +57,8 @@ void	redirections(char **command)
 				return (perror(command[i + 1]), exit(1));
 			dup2(fd, STDOUT_FILENO);
 			close(fd);
-			command[i] = NULL;
+			free(command[i]);
+			command[i] = ft_strdup(command[i + 1]);
 		}
 		else if (ft_strcmp(command[i], ">>") == 0)
 		{
@@ -64,7 +67,8 @@ void	redirections(char **command)
 				return (perror(command[i + 1]), exit(1));
 			dup2(fd, STDOUT_FILENO);
 			close(fd);
-			command[i] = NULL;
+			free(command[i]);
+			command[i] = ft_strdup(command[i + 1]);
 		}
 		else if (ft_strcmp(command[i], "<") == 0)
 		{
@@ -73,7 +77,8 @@ void	redirections(char **command)
 				return (perror(command[i + 1]), exit(1));
 			dup2(fd, STDIN_FILENO);
 			close(fd);
-			command[i] = NULL;
+			free(command[i]);
+			command[i] = ft_strdup(command[i + 1]);
 		}
 		else if (ft_strcmp(command[i], "<<") == 0)
 		{
@@ -82,7 +87,28 @@ void	redirections(char **command)
 				return (perror("heredoc"), exit(1));
 			dup2(fd, STDIN_FILENO);
 			close(fd);
-			command[i] = NULL;
+			free(command[i]);
+			command[i] = ft_strdup(command[i + 1]);
+		}
+		i++;
+	}
+}
+
+void	null_complex(char **redir)
+{
+	int		i;
+
+	i = 0;
+	while (redir[i])
+	{
+		if (is_complex(redir[i]))
+		{
+			free(redir[i]);
+			redir[i] = NULL;
+			i++;
+			while (redir[i])
+				free(redir[i++]);
+			break ;
 		}
 		i++;
 	}
