@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+         #
+#    By: tomlimon <tom.limon@>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 23:56:39 by tomlimon          #+#    #+#              #
-#    Updated: 2025/02/04 17:44:42 by taomalbe         ###   ########.fr        #
+#    Updated: 2025/02/09 16:01:02 by tomlimon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRCS = ./srcs/main/main.c \
 		./srcs/executor/executor.c ./srcs/parser/utils.c\
 		./srcs/utils/utils.c ./srcs/utils/find_path.c ./srcs/utils/shlvl.c ./srcs/utils/ascii.c\
 		./srcs/signals/signals.c ./srcs/utils/splitfou.c\
-		./srcs/executor/pipes.c ./srcs/executor/redirections.c 
+		./srcs/executor/pipes.c ./srcs/executor/redirections.c
 
 LIBFT_DIR = ./includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -46,7 +46,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 YELLOW = \033[0;33m
 GREEN = \033[0;32m
-RESET = \033[0m
+RESET = \033[0;34m
 RED = \033[0;31m
 
 # Compilation rules

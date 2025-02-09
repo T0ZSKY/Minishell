@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:10:24 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/06 17:35:59 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/09 15:50:08 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,76 +40,76 @@ char **copy_arguments(char **tab)
 
 void execute_child(char **args_copy, char **envp)
 {
-    char *cmd_path;
+	char *cmd_path;
 
-    cmd_path = find_command_path(args_copy[0]);
-    if (!cmd_path)
-    {
-        printf("%s: command not found\n", args_copy[0]);
-        ft_free_tab(args_copy);
-        exit(127);
-    }
-    if (execve(cmd_path, args_copy, envp) == -1)
-    {
-        perror("execve");
-        free(cmd_path);
-        ft_free_tab(args_copy);
-        exit(126);
-    }
-    free(cmd_path);
+	cmd_path = find_command_path(args_copy[0]);
+	if (!cmd_path)
+	{
+		printf("%s: command not found\n", args_copy[0]);
+		ft_free_tab(args_copy);
+		exit(127);
+	}
+	if (execve(cmd_path, args_copy, envp) == -1)
+	{
+		perror("execve");
+		free(cmd_path);
+		ft_free_tab(args_copy);
+		exit(126);
+	}
+	free(cmd_path);
 }
 
 void ft_cmd(char **tab, char **envp, t_shell *shell)
 {
-    pid_t pid;
-    char **args_copy;
-    int status;
-    int i;
-    int path_found;
-    
-    i = 0;
-    path_found = 0;
-    while (shell->envp[i]) 
-    {
-        if (ft_strncmp(shell->envp[i], "PATH=", 5) == 0) 
-        {
-            path_found = 1;
-            break;
-        }
-        i++;
-    }
+	pid_t pid;
+	char **args_copy;
+	int status;
+	int i;
+	int path_found;
 
-    if (!path_found) 
-    {
-        printf("minishell: %s: No such file or directory\n", tab[0]);
-        g_last_exit_status = 127;
-        return;
-    }
-    args_copy = copy_arguments(tab);
-    if (!args_copy)
-        return;
+	i = 0;
+	path_found = 0;
+	while (shell->envp[i])
+	{
+		if (ft_strncmp(shell->envp[i], "PATH=", 5) == 0)
+		{
+			path_found = 1;
+			break;
+		}
+		i++;
+	}
 
-    pid = fork();
-    if (pid == -1)
-    {
-        perror("fork");
-        ft_free_tab(args_copy);
-        g_last_exit_status = 1;
-        return;
-    }
+	if (!path_found)
+	{
+		printf("minishell: %s: No such file or directory\n", tab[0]);
+		g_last_exit_status = 127;
+		return;
+	}
+	args_copy = copy_arguments(tab);
+	if (!args_copy)
+		return;
 
-    if (pid == 0)
-    {
-        execute_child(args_copy, envp);
-    }
-    else
-    {
-        ft_free_tab(args_copy);
-        waitpid(pid, &status, 0);
-        
-        if (WIFEXITED(status))
-            g_last_exit_status = WEXITSTATUS(status);
-        else
-            g_last_exit_status = 1;
-    }
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("fork");
+		ft_free_tab(args_copy);
+		g_last_exit_status = 1;
+		return;
+	}
+
+	if (pid == 0)
+	{
+		execute_child(args_copy, envp);
+	}
+	else
+	{
+		ft_free_tab(args_copy);
+		waitpid(pid, &status, 0);
+
+		if (WIFEXITED(status))
+			g_last_exit_status = WEXITSTATUS(status);
+		else
+			g_last_exit_status = 1;
+	}
 }

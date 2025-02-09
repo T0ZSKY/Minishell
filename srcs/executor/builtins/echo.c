@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:59:41 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/07 09:28:55 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/09 15:49:44 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ char *expand_variable(char *str, int *index, char **envp)
 	i = *index + 1;
 	len = 0;
 	if (str[*index + 1] == '?')
-    {
-        status_str = ft_itoa(g_last_exit_status);
-        *index += 2;
-        return status_str;
-    }
+	{
+		status_str = ft_itoa(g_last_exit_status);
+		*index += 2;
+		return status_str;
+	}
 	while (str[i + len] && (ft_isalnum(str[i + len]) || str[i + len] == '_'))
 		len++;
 	if (len == 0)
@@ -81,31 +81,31 @@ static char *handle_quoted_content(char *str, int *i, int *j, char quote, char *
 
 static char *handle_variable(char *str, int *i, int *j, char *result, char **envp)
 {
-    char *expanded;
-    int new_len;
-    char *temp_result;
+	char *expanded;
+	int new_len;
+	char *temp_result;
 
-    expanded = expand_variable(str, i, envp);
-    if (expanded)
-    {
-        new_len = *j + ft_strlen(expanded) + 1;
+	expanded = expand_variable(str, i, envp);
+	if (expanded)
+	{
+		new_len = *j + ft_strlen(expanded) + 1;
 
-        temp_result = malloc(sizeof(char) * new_len);
-        if (!temp_result)
-        {
-            ft_putstr_fd("Error: Memory allocation failed\n", 2);
-            free(result);
-            return NULL;
-        }
+		temp_result = malloc(sizeof(char) * new_len);
+		if (!temp_result)
+		{
+			ft_putstr_fd("Error: Memory allocation failed\n", 2);
+			free(result);
+			return NULL;
+		}
 
-        ft_strcpy(temp_result, result);
-        free(result); 
-        ft_strcpy(&temp_result[*j], expanded);
-        *j += ft_strlen(expanded);
-        free(expanded);
-        return temp_result;
-    }
-    return result;
+		ft_strcpy(temp_result, result);
+		free(result);
+		ft_strcpy(&temp_result[*j], expanded);
+		*j += ft_strlen(expanded);
+		free(expanded);
+		return temp_result;
+	}
+	return result;
 }
 
 

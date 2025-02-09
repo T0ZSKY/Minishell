@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/07 15:17:10 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/09 15:47:56 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int main(int argc, char **argv, char **envp)
 	clear_history();
 	if (shell.envp)
 	{
-    	i = 0;
-    	while (shell.envp[i])
-        	free(shell.envp[i++]);
-    	free(shell.envp);
+		i = 0;
+		while (shell.envp[i])
+			free(shell.envp[i++]);
+		free(shell.envp);
 	}
 }

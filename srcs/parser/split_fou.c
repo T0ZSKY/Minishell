@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_fou.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:14:02 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/05 17:11:53 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/09 15:55:52 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int ft_charset(char c)
 {
-    if (c == ' ' || c == '|')
-        return (1);
-    return (0);
+	if (c == ' ' || c == '|')
+		return (1);
+	return (0);
 }
 
 static size_t	ft_countwords(char const *s)
@@ -47,7 +47,7 @@ static size_t	ft_wordlen(const char *s)
 		i++;
 	return (i);
 }
-
+//fonction de grand malade
 char	**ft_split_fou(char *s)
 {
 	size_t	i;
