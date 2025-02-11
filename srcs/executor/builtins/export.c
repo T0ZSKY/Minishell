@@ -6,13 +6,13 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 23:35:54 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/05 15:59:19 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:32:10 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/header/minishell.h"
 
-t_shell	*init_shell(char **envp) //IMPORTANT j'appelle dans le main pour faire la copie de notre envp
+t_shell	*init_shell(char **envp)
 {
 	t_shell	*shell;
 	int		count;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/11 15:50:21 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:07:17 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,15 @@ typedef struct s_pipe
 	pid_t	pids[1024];
 	char	**envp;
 }	t_pipe;
+
+
+typedef struct s_echo_data
+{
+    char    **envp;
+    char    *result;
+    int     i;
+    int     j;
+}   t_echo_data;
 
 //SEULE VARIABLE GLOBALE OBLIGATOIRE POUR SIGNAL ; pas besoin de full maj bebou
 extern int g_last_exit_status;
@@ -81,5 +90,10 @@ void	redirections(char *cmd);
 int		heredoc(char *limiter);
 void	null_complex(char **redir);
 void	ft_cmd_test(char *cmd, char **envp);
+char	*handle_exit_status(int *index);
+int	get_var_length(char *str, int i);
+char	*get_var_name(char *str, int i, int len);
+char	*find_env_value(char *var_name, int len, char **envp);
+void	init_signals(void);
 
 #endif

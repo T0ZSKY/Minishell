@@ -6,19 +6,20 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:42:54 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/05 16:03:33 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:53:54 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/header/minishell.h"
 
-void ft_unset(char **tab, t_shell *shell)
+void	ft_unset(char **tab, t_shell *shell)
 {
-	int i = 1;
-	int j;
-	int len;
+	int	i;
+	int	j;
+	int	len;
 
-	while (tab[i])
+	i = 1;
+	while (tab[i++])
 	{
 		j = 0;
 		len = ft_strlen(tab[i]);
@@ -33,10 +34,9 @@ void ft_unset(char **tab, t_shell *shell)
 					j++;
 				}
 				shell->envp[j] = NULL;
-				break;
+				break ;
 			}
 			j++;
 		}
-		i++;
 	}
 }

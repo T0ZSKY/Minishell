@@ -6,7 +6,7 @@
 #    By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 23:56:39 by tomlimon          #+#    #+#              #
-#    Updated: 2025/02/11 14:22:49 by tomlimon         ###   ########.fr        #
+#    Updated: 2025/02/11 17:03:25 by tomlimon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRCS = ./srcs/main/main.c \
 		./srcs/parser/lexer.c \
 		./srcs/executor/builtins/echo.c ./srcs/executor/builtins/echo_utils.c ./srcs/executor/builtins/cd.c ./srcs/executor/builtins/export.c\
 		./srcs/executor/builtins/export_utils.c ./srcs/executor/builtins/pwd.c ./srcs/executor/builtins/env.c\
-		./srcs/executor/builtins/exit.c ./srcs/executor/builtins/unset.c\
+		./srcs/executor/builtins/exit.c ./srcs/executor/builtins/unset.c ./srcs/executor/builtins/echo_utils2.c\
 		./srcs/executor/executor.c ./srcs/parser/utils.c\
 		./srcs/utils/utils.c ./srcs/utils/find_path.c ./srcs/utils/shlvl.c ./srcs/utils/ascii.c\
 		./srcs/signals/signals.c ./srcs/utils/splitfou.c ./srcs/utils/utils_path.c\
