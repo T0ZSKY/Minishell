@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:10:24 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/09 15:50:08 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:41:49 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
 
-char **copy_arguments(char **tab)
+char	**copy_arguments(char **tab)
 {
-	char **args_copy;
-	int i = 0;
+	char	**args_copy;
+	int		i;
 
+	i = 0;
 	while (tab[i])
 		i++;
 	args_copy = malloc(sizeof(char *) * (i + 1));
 	if (!args_copy)
 		return (NULL);
-
 	i = 0;
 	while (tab[i])
 	{
@@ -38,9 +38,9 @@ char **copy_arguments(char **tab)
 	return (args_copy);
 }
 
-void execute_child(char **args_copy, char **envp)
+void	execute_child(char **args_copy, char **envp)
 {
-	char *cmd_path;
+	char 	*cmd_path;
 
 	cmd_path = find_command_path(args_copy[0]);
 	if (!cmd_path)
@@ -61,11 +61,11 @@ void execute_child(char **args_copy, char **envp)
 
 void ft_cmd(char **tab, char **envp, t_shell *shell)
 {
-	pid_t pid;
-	char **args_copy;
-	int status;
-	int i;
-	int path_found;
+	int		i;
+	int		status;
+	int		path_found;
+	pid_t	pid;
+	char	**args_copy;
 
 	i = 0;
 	path_found = 0;
@@ -78,7 +78,6 @@ void ft_cmd(char **tab, char **envp, t_shell *shell)
 		}
 		i++;
 	}
-
 	if (!path_found)
 	{
 		printf("minishell: %s: No such file or directory\n", tab[0]);
@@ -88,7 +87,6 @@ void ft_cmd(char **tab, char **envp, t_shell *shell)
 	args_copy = copy_arguments(tab);
 	if (!args_copy)
 		return;
-
 	pid = fork();
 	if (pid == -1)
 	{
@@ -97,11 +95,8 @@ void ft_cmd(char **tab, char **envp, t_shell *shell)
 		g_last_exit_status = 1;
 		return;
 	}
-
 	if (pid == 0)
-	{
 		execute_child(args_copy, envp);
-	}
 	else
 	{
 		ft_free_tab(args_copy);

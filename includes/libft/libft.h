@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 10:30:42 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/01/29 16:46:23 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:09:24 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ char			*ft_strncpy(char *dest, const char *src, unsigned int n);
 char			*ft_strcpy(char *dest, const char *src);
 int				ft_isspace(char c);
 int				ft_tablen(char **tab);
-
 
 //--------------------------part2------------------------//
 

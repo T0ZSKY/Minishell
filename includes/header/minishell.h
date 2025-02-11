@@ -3,22 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/07 15:17:18 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:50:21 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 
-//stucure
-typedef struct s_shell
-{
-	int is_running;
-	char **tab;
-	char **envp; //copie de envp que je vais utilisé pour les builtins genre la modifié et tout
-} t_shell;
 
 //include
 
@@ -31,20 +24,39 @@ typedef struct s_shell
 # include <sys/types.h>
 # include <sys/wait.h>
 
-//SEULE VARIABLE GLOBALE OBLIGATOIRE POUR SIGNAL
+//stucure
+typedef struct s_shell
+{
+	int		is_running;
+	char	**tab;
+	char	**envp; //copie de envp que je vais utilisé pour les builtins genre la modifié et tout
+	char	*cmd; //justification : merci la norme :))))
+}	t_shell;
+
+typedef struct s_pipe
+{
+	int		fd[2];
+	int		hdoc;
+	int		prev_pipe;
+	pid_t	pid;
+	pid_t	pids[1024];
+	char	**envp;
+}	t_pipe;
+
+//SEULE VARIABLE GLOBALE OBLIGATOIRE POUR SIGNAL ; pas besoin de full maj bebou
 extern int g_last_exit_status;
 
 
 //declaration
 void	ft_lexer(char *input, t_shell *shell);
 void 	ft_echo(char **tab, char **envp);
-void ft_cmd(char **tab, char **envp, t_shell *shell);
+void 	ft_cmd(char **tab, char **envp, t_shell *shell);
 void	ft_free_tab(char **tab);
 char	*find_command_path(char *cmd);
 char	*join_path(char *dir, char *cmd);
 char	*replace_pipes(char *cmd);
 char	**split_path(char *path);
-void ft_cd(char **tab, t_shell *shell);
+void 	ft_cd(char **tab, t_shell *shell);
 void	increment_shell_level(void);
 void	exec_pipes(char **command, char **envp, t_shell *shell);
 void 	execute_child(char **args_copy, char **envp);
@@ -68,5 +80,6 @@ int		ft_custom_cmd_args(char *cmd, t_shell *shell);
 void	redirections(char *cmd);
 int		heredoc(char *limiter);
 void	null_complex(char **redir);
+void	ft_cmd_test(char *cmd, char **envp);
 
 #endif
