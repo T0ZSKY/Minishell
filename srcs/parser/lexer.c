@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/11 14:35:26 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:49:00 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	check_first_commands(char **tab, t_shell *shell)
 {
 	if (ft_strcmp(tab[0], "echo") == 0)
 	{
-		ft_echo(tab, shell->envp);
+		ft_echo(tab, shell->envp, 1);
 		return (0);
 	}
 	if (ft_strcmp(tab[0], "cd") == 0)
@@ -72,10 +72,10 @@ int	ft_custom_cmd_args(char *cmd, t_shell *shell)
 	return (result);
 }
 
-void	ft_custom_cmd(t_shell *shell)
+void	ft_custom_cmd(t_shell *shell, int complex)
 {
 	if (ft_strcmp(shell->tab[0], "echo") == 0)
-		ft_echo(shell->tab, shell->envp);
+		ft_echo(shell->tab, shell->envp, complex);
 	else if (ft_strcmp(shell->tab[0], "cd") == 0)
 		ft_cd(shell->tab, shell);
 	else if (ft_strcmp(shell->tab[0], "pwd") == 0)
@@ -103,6 +103,7 @@ void	ft_lexer(char *input, t_shell *shell)
 		return ;
 	if (is_complex(input))
 	{
+		new_input = uncomplex_input(input);
 		split = ft_split(new_input, '|');
 		free(new_input);
 		exec_pipes(split, shell->envp, shell);
@@ -110,7 +111,7 @@ void	ft_lexer(char *input, t_shell *shell)
 	else
 	{
 		if (is_custom_cmd(shell->tab[0]) == 1)
-			ft_custom_cmd(shell);
+			ft_custom_cmd(shell, 0);
 		else
 			ft_cmd(shell->tab, shell->envp, shell);
 	}
