@@ -6,13 +6,13 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:26:36 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/06 17:05:26 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:20:00 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
 
-char *check_absolute_or_relative_path(char *cmd)
+char	*check_absolute_or_relative_path(char *cmd)
 {
 	if (!cmd || !*cmd)
 		return (NULL);
@@ -25,10 +25,10 @@ char *check_absolute_or_relative_path(char *cmd)
 	return (NULL);
 }
 
-char **get_path_directories(void)
+char	**get_path_directories(void)
 {
-	char *path_env;
-	char **dirs;
+	char	*path_env;
+	char	**dirs;
 
 	path_env = getenv("PATH");
 	if (!path_env)
@@ -41,10 +41,10 @@ char **get_path_directories(void)
 	return (dirs);
 }
 
-char *search_command_in_dirs(char **dirs, char *cmd)
+char	*search_command_in_dirs(char **dirs, char *cmd)
 {
-	int i;
-	char *full_path;
+	int		i;
+	char	*full_path;
 
 	i = 0;
 	while (dirs[i])
@@ -64,10 +64,10 @@ char *search_command_in_dirs(char **dirs, char *cmd)
 	return (NULL);
 }
 
-char *find_command_path(char *cmd)
+char	*find_command_path(char *cmd)
 {
-	char **dirs;
-	char *result;
+	char	**dirs;
+	char	*result;
 
 	result = check_absolute_or_relative_path(cmd);
 	if (result)

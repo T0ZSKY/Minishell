@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tomlimon <tom.limon@>                      +#+  +:+       +#+         #
+#    By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 23:56:39 by tomlimon          #+#    #+#              #
-#    Updated: 2025/02/09 16:01:02 by tomlimon         ###   ########.fr        #
+#    Updated: 2025/02/11 14:22:49 by tomlimon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS = ./srcs/main/main.c \
 		./srcs/executor/builtins/exit.c ./srcs/executor/builtins/unset.c\
 		./srcs/executor/executor.c ./srcs/parser/utils.c\
 		./srcs/utils/utils.c ./srcs/utils/find_path.c ./srcs/utils/shlvl.c ./srcs/utils/ascii.c\
-		./srcs/signals/signals.c ./srcs/utils/splitfou.c\
+		./srcs/signals/signals.c ./srcs/utils/splitfou.c ./srcs/utils/utils_path.c\
 		./srcs/executor/pipes.c ./srcs/executor/redirections.c
 
 LIBFT_DIR = ./includes/libft

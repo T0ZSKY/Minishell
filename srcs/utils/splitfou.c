@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   splitfou.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:07:29 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/01/31 18:24:14 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:19:00 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
 
-int ft_is_charset(char c)
+int	ft_is_charset(char c)
 {
 	if (c == ' ' || c == '|')
 		return (1);
 	return (0);
 }
 
-int countwords(char *str)
+int	countwords(char *str)
 {
 	int	i;
 	int	words;
@@ -47,8 +47,6 @@ int	wordlen(char *str)
 		i++;
 	return (i);
 }
-
-
 
 char	**ft_splitfou(char *str)
 {
