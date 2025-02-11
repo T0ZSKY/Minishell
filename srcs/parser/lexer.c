@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/11 14:35:26 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/11 22:53:08 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,6 @@ void	ft_lexer(char *input, t_shell *shell)
 		else
 			ft_cmd(shell->tab, shell->envp, shell);
 	}
+	if (new_input)
+		free(new_input);
 }

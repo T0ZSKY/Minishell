@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:10:24 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/11 17:00:20 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/11 22:46:48 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	ft_cmd(char **tab, char **envp, t_shell *shell)
 {
 	char	**args_copy;
 
+	g_last_exit_status = 0;
 	check_path_exists(shell, tab);
 	if (g_last_exit_status == 127)
 		return ;

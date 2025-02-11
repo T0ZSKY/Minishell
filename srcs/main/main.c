@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/11 15:08:17 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/11 23:02:37 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,17 @@ static void	shell_loop(t_shell *shell)
 	clear_history();
 }
 
-static void	init_shell_env(t_shell *shell, char **envp, int argc, char **argv)
+void	init_shell_env(t_shell *shell, char **envp, int argc, char **argv)
 {
+	t_shell	*tmp;
+
 	if (argc && argv)
 		shell->is_running = 1;
 	increment_shell_level();
 	ft_ascii();
-	shell->envp = init_shell(envp)->envp;
+	tmp = init_shell(envp);
+	shell->envp = tmp->envp;
+	free(tmp);
 }
 
 int	main(int argc, char **argv, char **envp)
