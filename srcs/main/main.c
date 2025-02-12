@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/11 23:02:37 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/12 02:42:45 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_last_exit_status = 0;
 
-static void	free_shell_env(t_shell *shell)
+void	free_shell_env(t_shell *shell)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:10:24 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/11 22:46:48 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/12 02:54:15 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ void	execute_command(char **args_copy, char **envp)
 		execute_child(args_copy, envp);
 	else
 	{
-		ft_free_tab(args_copy);
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 			g_last_exit_status = WEXITSTATUS(status);
 		else
 			g_last_exit_status = 1;
+		ft_free_tab(args_copy);
 	}
 }
 
