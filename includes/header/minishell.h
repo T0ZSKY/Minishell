@@ -6,11 +6,12 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/12 14:20:55 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:23:32 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
+# define MINISHELL_H
 
 //include
 # include "stdio.h"
@@ -27,8 +28,8 @@ typedef struct s_shell
 {
 	int		is_running;
 	char	**tab;
-	char	**envp; //copie de envp que je vais utilisé pour les builtins genre la modifié et tout
-	char	*cmd; //justification : merci la norme :))))
+	char	**envp;
+	char	*cmd;
 }	t_shell;
 
 typedef struct s_pipe
@@ -40,6 +41,14 @@ typedef struct s_pipe
 	pid_t	pids[1024];
 	char	**envp;
 }	t_pipe;
+
+typedef struct s_echo_data
+{
+	char	**envp;
+	char	*result;
+	int		i;
+	int		j;
+}	t_echo_data;
 
 //SEULE VARIABLE GLOBALE OBLIGATOIRE POUR SIGNAL ; pas besoin de full maj bebou
 extern int	g_last_exit_status;
