@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:13:02 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/11 15:07:51 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/12 20:55:42 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	ctrl_c_handler(int sig)
 	(void)sig;
 	rl_on_new_line();
 	printf("\n");
-	rl_replace_line("", 0);
+//	rl_replace_line("", 0);
 	rl_redisplay();
 }
