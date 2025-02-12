@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/12 14:23:32 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:29:16 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ extern int	g_last_exit_status;
 int		heredoc(char *limiter);
 int		is_custom_cmd(char *s);
 int		is_complex(char *input);
+int		get_var_length(char *str, int i);
 int		handle_n_flag(char **tab, int *j);
 int		ft_custom_cmd_args(char *cmd, t_shell *shell);
 
 void	ft_ascii();
 void	ft_pwd(char **tab);
+void	init_signals(void);
 void	ft_free_tab(char **tab);
 void	ft_exit(t_shell *shell);
 void	ctrl_c_handler(int sig);
@@ -85,7 +87,10 @@ void	exec_pipes(char **command, char **envp, t_shell *shell);
 char	*replace_pipes(char *cmd);
 char	*uncomplex_input(char *input);
 char	*find_command_path(char *cmd);
+char	*handle_exit_status(int *index);
 char	*join_path(char *dir, char *cmd);
+char	*get_var_name(char *str, int i, int len);
+char	*find_env_value(char *var_name, int len, char **envp);
 
 char	**split_path(char *path);
 char	**ft_splitfou(char *str);
