@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/12 14:48:15 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:30:29 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	exec_child_3(t_pipe *pipes, t_shell *shell)
 		}
 		exit(0);
 	}
+	printf("\n[%s]\n", shell->cmd);
 	ft_cmd_test(shell->cmd, pipes->envp);
 	exit(1);
 }
@@ -68,10 +69,10 @@ void	exec_child(int prev_pipe, int fd[2], t_pipe *pipes, t_shell *shell)
 	if (is_complex(shell->cmd) && ft_strnstr(shell->cmd, "<<",
 			ft_strlen(shell->cmd)))
 	{
-		split_cmd = ft_split(shell->cmd, ' ');
-		while (ft_strcmp(split_cmd[i], "<<") && split_cmd[i])
+		split_cmd = ft_split_fou(shell->cmd);
+		while (split_cmd[i + 1])
 			i++;
-		pipes->hdoc = heredoc(split_cmd[i + 1]);
+		pipes->hdoc = heredoc(split_cmd[i]);
 		ft_free_tab(split_cmd);
 	}
 	exec_child_2(prev_pipe, fd, shell, pipes);
@@ -103,6 +104,9 @@ void	exec_pipes(char **command, char **envp, t_shell *shell)
 	i = 0;
 	status = 0;
 	pipes.prev_pipe = -1;
+	while (i < 1024)
+		pipes.pids[i++] = 0;
+	i = 0;
 	while (command[i])
 	{
 		pipes.fd[0] = -1;

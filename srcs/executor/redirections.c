@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:36:08 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/12 14:45:57 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:54:47 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,16 +103,6 @@ void	redirections(char *cmd)
 			fd = open(command[i + 1], O_RDONLY);
 			if (fd == -1)
 				return (perror(command[i + 1]), exit(1));
-			dup2(fd, STDIN_FILENO);
-			close(fd);
-			free(command[i]);
-			command[i] = ft_strdup(command[i + 1]);
-		}
-		else if (ft_strcmp(command[i], "<<") == 0)
-		{
-			fd = heredoc(command[i + 1]);
-			if (fd == -1)
-				return (perror("heredoc"), exit(1));
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 			free(command[i]);

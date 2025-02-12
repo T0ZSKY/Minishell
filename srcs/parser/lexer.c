@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/12 14:26:24 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:11:17 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	ft_custom_cmd(t_shell *shell, int complex)
 	else
 	{
 		printf("%s: command not found\n", shell->tab[0]);
+		ft_free_tab(shell->tab);
 		g_last_exit_status = 127;
 	}
 }
@@ -107,12 +108,10 @@ void	ft_lexer(char *input, t_shell *shell)
 		return ;
 	shell->tab = ft_split(new_input, ' ');
 	if (!shell->tab || !shell->tab[0])
-	{
-		free(new_input);
-		return ;
-	}
+		return (free(new_input));
 	if (is_complex(input))
 	{
+		free(new_input);
 		new_input = uncomplex_input(input);
 		split = ft_split(new_input, '|');
 		free(new_input);
@@ -120,11 +119,10 @@ void	ft_lexer(char *input, t_shell *shell)
 	}
 	else
 	{
+		free(new_input);
 		if (is_custom_cmd(shell->tab[0]) == 1)
 			ft_custom_cmd(shell, 0);
 		else
 			ft_cmd(shell->tab, shell->envp, shell);
 	}
-	if (!is_complex(input))
-		free(new_input);
 }

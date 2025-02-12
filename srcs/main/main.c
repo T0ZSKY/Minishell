@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/12 02:42:45 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:15:15 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static void	handle_input(char *input, t_shell *shell)
 		shell->is_running = 0;
 		return ;
 	}
+	add_history(input);
 	ft_lexer(input, shell);
 	if (shell->tab)
 		ft_free_tab(shell->tab);
-	add_history(input);
 	free(input);
 }
 

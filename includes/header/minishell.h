@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/12 14:29:16 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:43:34 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ char	*find_env_value(char *var_name, int len, char **envp);
 char	**split_path(char *path);
 char	**ft_splitfou(char *str);
 char	**ft_copy_env(char **envp, int count);
+char	**ft_split_fou(char *s);
 
 t_shell	*init_shell(char **envp);
 
