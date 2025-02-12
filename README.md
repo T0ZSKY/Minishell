@@ -34,5 +34,5 @@ make
 
 ## Crédits
 Projet réalisé dans le cadre de l'école 42.
-
+merci au goat taomalbe
 
