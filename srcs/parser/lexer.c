@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/12 02:53:54 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/12 03:02:32 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@ void	ft_custom_cmd(t_shell *shell)
 		ft_exit(shell);
 	else if (ft_strcmp(shell->tab[0], "unset") == 0)
 		ft_unset(shell->tab, shell);
+	else
+	{
+		printf("%s: command not found\n", shell->tab[0]);
+		g_last_exit_status = 127;
+	}
 }
 
 void	ft_lexer(char *input, t_shell *shell)
