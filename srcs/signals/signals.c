@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:13:02 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/12 23:31:42 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:33:59 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_signals(void)
 void	ctrl_c_handler(int sig)
 {
 	(void)sig;
+	g_last_exit_status = 130;
 	rl_on_new_line();
 	printf("\n");
 	rl_replace_line("", 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/12 23:31:12 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:33:55 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ static void	shell_loop(t_shell *shell)
 
 	while (shell->is_running)
 	{
-		input = readline("\033[31mminishell » \033[0m");
+		if (g_last_exit_status == 130)
+			printf("\r");
+		input = readline("\033[31mminishell1 » \033[0m");
 		handle_input(input, shell);
 	}
 	clear_history();
