@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/12 15:43:34 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:26:29 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	ft_echo(char **tab, char **envp, int complex);
 void	ft_cmd(char **tab, char **envp, t_shell *shell);
 void	exec_pipes(char **command, char **envp, t_shell *shell);
 
+char	*redir_space(char *cmd);
 char	*replace_pipes(char *cmd);
 char	*uncomplex_input(char *input);
 char	*find_command_path(char *cmd);

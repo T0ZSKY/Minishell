@@ -6,7 +6,7 @@
 /*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/12 17:30:29 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:29:14 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	exec_child_3(t_pipe *pipes, t_shell *shell)
 {
+	char	*new;
+
 	if (is_complex(shell->cmd) && !ft_strnstr(shell->cmd, "<<",
 			ft_strlen(shell->cmd)))
 	{
@@ -33,8 +35,9 @@ void	exec_child_3(t_pipe *pipes, t_shell *shell)
 		}
 		exit(0);
 	}
-	printf("\n[%s]\n", shell->cmd);
-	ft_cmd_test(shell->cmd, pipes->envp);
+	new = redir_space(shell->cmd);
+	free(shell->cmd);
+	ft_cmd_test(new, pipes->envp);
 	exit(1);
 }
 
