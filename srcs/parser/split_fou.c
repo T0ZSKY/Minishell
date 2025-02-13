@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_fou.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:14:02 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/11 14:28:25 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:43:14 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_charset(char c)
 {
-	if (c == ' ' || c == '|')
+	if (c == ' ' || c == '<')
 		return (1);
 	return (0);
 }
