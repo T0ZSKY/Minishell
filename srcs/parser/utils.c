@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:33:54 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/11 17:01:30 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:35:43 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
+
+int	is_complex(char *input)
+{
+	if (ft_strstr(input, "|") || ft_strstr(input, ">")
+		|| ft_strstr(input, ">>") || ft_strstr(input, "<")
+		|| ft_strstr(input, "<<"))
+		return (1);
+	return (0);
+}
 
 char	*replace_pipes(char *cmd)
 {

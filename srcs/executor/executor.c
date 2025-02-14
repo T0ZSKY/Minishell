@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:10:24 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/13 17:34:12 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:34:34 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**copy_arguments(char **tab)
 
 void	execute_child(char **args_copy, char **envp)
 {
-	char 	*cmd_path;
+	char	*cmd_path;
 
 	cmd_path = find_command_path(args_copy[0]);
 	if (!cmd_path)
@@ -59,13 +59,10 @@ void	execute_child(char **args_copy, char **envp)
 	free(cmd_path);
 }
 
-void ft_cmd(char **tab, char **envp, t_shell *shell)
+void	check_path_exists(t_shell *shell, char **tab)
 {
-	int		i;
-	int		status;
-	int		path_found;
-	pid_t	pid;
-	char	**args_copy;
+	int	i;
+	int	path_found;
 
 	i = 0;
 	path_found = 0;
@@ -74,7 +71,7 @@ void ft_cmd(char **tab, char **envp, t_shell *shell)
 		if (ft_strncmp(shell->envp[i], "PATH=", 5) == 0)
 		{
 			path_found = 1;
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -82,26 +79,27 @@ void ft_cmd(char **tab, char **envp, t_shell *shell)
 	{
 		printf("minishell: %s: No such file or directory\n", tab[0]);
 		g_last_exit_status = 127;
-		return;
 	}
-	args_copy = copy_arguments(tab);
-	if (!args_copy)
-		return;
+}
+
+void	execute_command(char **args_copy, char **envp)
+{
+	pid_t	pid;
+	int		status;
+
 	pid = fork();
 	if (pid == -1)
 	{
 		perror("fork");
 		ft_free_tab(args_copy);
 		g_last_exit_status = 1;
-		return;
+		return ;
 	}
 	if (pid == 0)
 		execute_child(args_copy, envp);
 	else
 	{
-		ft_free_tab(args_copy);
 		waitpid(pid, &status, 0);
-
 		if (WIFEXITED(status))
 			g_last_exit_status = WEXITSTATUS(status);
 		else
@@ -111,4 +109,18 @@ void ft_cmd(char **tab, char **envp, t_shell *shell)
 		}
 		ft_free_tab(args_copy);
 	}
+}
+
+void	ft_cmd(char **tab, char **envp, t_shell *shell)
+{
+	char	**args_copy;
+
+	g_last_exit_status = 0;
+	check_path_exists(shell, tab);
+	if (g_last_exit_status == 127)
+		return ;
+	args_copy = copy_arguments(tab);
+	if (!args_copy)
+		return ;
+	execute_command(args_copy, envp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:59:41 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/12 14:26:13 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:51:15 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	*process_quotes(char *str, char **envp)
 	return (data.result);
 }
 
-void ft_echo(char **tab, char **envp, int complex)
+void	ft_echo(char **tab, char **envp)
 {
 	int		j;
 	int		flag;
@@ -102,7 +102,7 @@ void ft_echo(char **tab, char **envp, int complex)
 
 	j = 1;
 	flag = handle_n_flag(tab, &j);
-	while (tab[j] && (!ft_strchr(tab[j], '|') || !complex)) // AHAH SOUCIS REGLE 2
+	while (tab[j] && !ft_strchr(tab[j], '|'))
 	{
 		clean = process_quotes(tab[j], envp);
 		if (!clean)
@@ -110,7 +110,8 @@ void ft_echo(char **tab, char **envp, int complex)
 			ft_putstr_fd("Error: Unclosed quotes\n", 2);
 			return ;
 		}
-		print_clean_str(clean, tab[j + 1] != NULL && ft_strcmp(tab[j + 1], "|") != 0);
+		print_clean_str(clean, tab[j + 1] != NULL
+			&& ft_strcmp(tab[j + 1], "|") != 0);
 		free(clean);
 		j++;
 	}

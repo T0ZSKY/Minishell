@@ -1,76 +1,75 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_fou.c                                        :+:      :+:    :+:   */
+/*   splitfou.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 15:14:02 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/11 14:28:25 by tomlimon         ###   ########.fr       */
+/*   Created: 2025/01/31 18:07:29 by taomalbe          #+#    #+#             */
+/*   Updated: 2025/02/11 14:19:00 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
 
-int	ft_charset(char c)
+int	ft_is_charset(char c)
 {
 	if (c == ' ' || c == '|')
 		return (1);
 	return (0);
 }
 
-static size_t	ft_countwords(char const *s)
+int	countwords(char *str)
 {
-	size_t	i;
-	size_t	words;
+	int	i;
+	int	words;
 
 	i = 0;
 	words = 0;
-	while (s[i])
+	while (str[i])
 	{
-		while (s[i] && ft_charset(s[i]))
+		while (ft_is_charset(str[i]) && str[i])
 			i++;
-		if (s[i] && !ft_charset(s[i]))
+		if (!ft_is_charset(str[i]) && str[i])
 			words++;
-		while (s[i] && !ft_charset(s[i]))
+		while (!ft_is_charset(str[i]) && str[i])
 			i++;
 	}
 	return (words);
 }
 
-static size_t	ft_wordlen(const char *s)
+int	wordlen(char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (s[i] && !ft_charset(s[i]))
+	while (!ft_is_charset(str[i]) && str[i])
 		i++;
 	return (i);
 }
 
-char	**ft_split_fou(char *s)
+char	**ft_splitfou(char *str)
 {
-	size_t	i;
-	size_t	j;
-	size_t	len;
+	int		i;
+	int		j;
+	int		len;
 	char	**split;
 
-	i = 0;
-	j = 0;
-	split = (char **)malloc((ft_countwords(s) + 1) * sizeof(char *));
+	split = (char **)malloc((countwords(str) + 1) * sizeof(char *));
 	if (!split)
 		return (NULL);
-	while (s[i] && j < ft_countwords(s))
+	i = 0;
+	j = 0;
+	len = 0;
+	while (j < countwords(str))
 	{
-		while (s[i] && ft_charset(s[i]))
+		while (ft_is_charset(str[i]) && str[i])
 			i++;
-		len = ft_wordlen(s + i);
+		len = wordlen(str + i);
 		split[j] = (char *)malloc((len + 1) * sizeof(char));
 		if (!split[j])
 			return (NULL);
-		ft_strncpy(split[j], s + i, len);
-		split[j][len] = '\0';
-		i += len;
+		split[j] = ft_strncpy(split[j], str + i, len);
 		j++;
 	}
 	split[j] = NULL;
