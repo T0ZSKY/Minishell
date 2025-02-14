@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:36:08 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/14 20:00:28 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/14 21:15:03 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*add_spaces_redirections(char *cmd)
 
 	i = 0;
 	len = 0;
-	while (cmd[i]) // Calcul de la nouvelle taille avec les espaces ajoutés
+	while (cmd[i])
 	{
 		if (cmd[i] == '>' || cmd[i] == '<')
 		{
@@ -37,7 +37,7 @@ char	*add_spaces_redirections(char *cmd)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (cmd[i]) // Remplissage avec espaces ajoutés
+	while (cmd[i])
 	{
 		if (cmd[i] == '>' || cmd[i] == '<')
 		{
@@ -56,9 +56,7 @@ char	*add_spaces_redirections(char *cmd)
 	return (new_cmd);
 }
 
-
-//sacre here_doc pas gentil
-int heredoc(char *limiter)
+int	heredoc(char *limiter)
 {
 	int		fd[2];
 	char	*line;
@@ -84,19 +82,18 @@ int heredoc(char *limiter)
 	return (fd[0]);
 }
 
-
 char	*redirections(char *cmd)
 {
 	int		i;
 	int		fd;
 	char	**command;
+	char	*spaced_cmd;
 
 	i = 0;
-	char *spaced_cmd = add_spaces_redirections(cmd);
+	spaced_cmd = add_spaces_redirections(cmd);
 	if (!spaced_cmd)
-		return cmd;
+		return (cmd);
 	command = ft_split(spaced_cmd, ' ');
-
 	while (command[i + 1])
 	{
 		if (ft_strcmp(command[i], ">") == 0)
@@ -142,7 +139,7 @@ char	*redirections(char *cmd)
 		i++;
 	}
 	free(cmd);
-	return spaced_cmd;
+	return (spaced_cmd);
 }
 
 void	null_complex(char **redir)

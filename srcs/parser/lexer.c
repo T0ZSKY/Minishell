@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/14 20:00:46 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/14 21:19:25 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	ft_custom_cmd_args(char *cmd, t_shell *shell)
 {
 	char	**tab;
 	int		result;
+
 	tab = ft_split(cmd, ' ');
 	if (is_complex(cmd))
 		null_complex(tab);
@@ -97,7 +98,6 @@ void	ft_custom_cmd(t_shell *shell)
 void	ft_lexer(char *input, t_shell *shell)
 {
 	char	*new_input;
-	char	**split;
 
 	if (!input)
 		return ;
@@ -111,18 +111,7 @@ void	ft_lexer(char *input, t_shell *shell)
 		return ;
 	}
 	if (is_complex(input))
-	{
-		split = ft_split(new_input, '|');
-		free(new_input);
-		exec_pipes(split, shell->envp, shell);
-	}
+		ft_handle_pipes(new_input, shell);
 	else
-	{
-		if (is_custom_cmd(shell->tab[0]) == 1)
-			ft_custom_cmd(shell);
-		else
-			ft_cmd(shell->tab, shell->envp, shell);
-	}
-	if (!is_complex(input))
-		free(new_input);
+		ft_execute_command(shell, new_input);
 }

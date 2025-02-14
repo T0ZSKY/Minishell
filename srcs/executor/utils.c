@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/14 21:18:54 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/14 21:19:17 by tomlimon         ###   ########.fr       */
+/*   Created: 2025/02/14 21:13:33 by tomlimon          #+#    #+#             */
+/*   Updated: 2025/02/14 21:14:53 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
 
-void	ft_handle_pipes(char *input, t_shell *shell)
+void	ft_cmd_test(char *cmd, char **envp)
 {
-	char	**split;
+	char	*path;
+	char	**args;
 
-	split = ft_split(input, '|');
-	free(input);
-	exec_pipes(split, shell);
-}
-
-void	ft_execute_command(t_shell *shell, char *input)
-{
-	if (is_custom_cmd(shell->tab[0]) == 1)
-		ft_custom_cmd(shell);
-	else
-		ft_cmd(shell->tab, shell->envp, shell);
-	if (!is_complex(input))
-		free(input);
+	args = ft_split(cmd, ' ');
+	if (!args)
+	{
+		perror("ft_split");
+		exit(1);
+	}
+	if (is_complex(cmd))
+		null_complex(args);
+	free(cmd);
+	path = find_command_path(args[0]);
+	if (!path)
+	{
+		perror(args[0]);
+		ft_free_tab(args);
+		exit(1);
+	}
+	execve(path, args, envp);
+	perror("execve");
+	free(path);
+	ft_free_tab(args);
+	exit(1);
 }

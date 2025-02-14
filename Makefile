@@ -6,7 +6,7 @@
 #    By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 23:56:39 by tomlimon          #+#    #+#              #
-#    Updated: 2025/02/12 02:46:50 by tomlimon         ###   ########.fr        #
+#    Updated: 2025/02/14 21:20:36 by tomlimon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ endif
 
 NAME = minishell
 SRCS = ./srcs/main/main.c \
-		./srcs/parser/lexer.c \
+		./srcs/parser/lexer.c ./srcs/executor/utils.c ./srcs/parser/parser.c\
 		./srcs/executor/builtins/echo.c ./srcs/executor/builtins/echo_utils.c ./srcs/executor/builtins/cd.c ./srcs/executor/builtins/export.c\
 		./srcs/executor/builtins/export_utils.c ./srcs/executor/builtins/pwd.c ./srcs/executor/builtins/env.c\
 		./srcs/executor/builtins/exit.c ./srcs/executor/builtins/unset.c ./srcs/executor/builtins/echo_utils2.c\

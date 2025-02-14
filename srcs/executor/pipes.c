@@ -6,56 +6,27 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/14 19:58:18 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/14 20:58:21 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
 
-void	ft_cmd_test(char *cmd, char **envp)
+void	handle_heredoc(char *cmd, int *heredoc_fd)
 {
-	char	*path;
-	char	**args;
-
-	args = ft_split(cmd, ' ');
-	if (!args)
-	{
-		perror("ft_split");
-		exit(1);
-	}
-	if (is_complex(cmd))
-		null_complex(args);
-	free(cmd);
-	path = find_command_path(args[0]);
-	if (!path)
-	{
-		perror(args[0]);
-		ft_free_tab(args);
-		exit(1);
-	}
-	execve(path, args, envp);
-	perror("execve");
-	free(path);
-	ft_free_tab(args);
-	exit(1);
-}
-
-void	exec_child(char *cmd, int prev_pipe, int fd[2], char **envp, t_shell *shell)
-{
-	int		i;
-	int		heredoc_fd;
 	char	**split_cmd;
+	int		i;
 
 	i = 0;
-	heredoc_fd = -1;
-	if (is_complex(cmd) && ft_strnstr(cmd, "<<", ft_strlen(cmd)))
-	{
-		split_cmd = ft_split(cmd, ' ');
-		while (ft_strcmp(split_cmd[i], "<<") && split_cmd[i])
-			i++;
-		heredoc_fd = heredoc(split_cmd[i + 1]);
-		ft_free_tab(split_cmd);
-	}
+	split_cmd = ft_split(cmd, ' ');
+	while (split_cmd[i] && ft_strcmp(split_cmd[i], "<<"))
+		i++;
+	*heredoc_fd = heredoc(split_cmd[i + 1]);
+	ft_free_tab(split_cmd);
+}
+
+void	setup_redirections(int prev_pipe, int fd[2], int heredoc_fd)
+{
 	if (heredoc_fd != -1)
 	{
 		dup2(heredoc_fd, STDIN_FILENO);
@@ -72,39 +43,61 @@ void	exec_child(char *cmd, int prev_pipe, int fd[2], char **envp, t_shell *shell
 		close(fd[1]);
 		close(fd[0]);
 	}
+}
+
+void	exec_child(char *cmd, int prev_pipe, int fd[2], t_shell *shell)
+{
+	int	heredoc_fd;
+
+	heredoc_fd = -1;
+	if (is_complex(cmd) && ft_strnstr(cmd, "<<", ft_strlen(cmd)))
+		handle_heredoc(cmd, &heredoc_fd);
+	setup_redirections(prev_pipe, fd, heredoc_fd);
 	if (is_complex(cmd) && !ft_strnstr(cmd, "<<", ft_strlen(cmd)))
 	{
 		cmd = redirections(cmd);
 		if (!cmd)
 			exit(1);
-		if (is_custom_cmd(cmd))
-			ft_custom_cmd_args(cmd, shell);
-		else
-			ft_cmd_test(cmd, envp);
-		exit(0);
 	}
-	else if (is_custom_cmd(cmd))
+	if (is_custom_cmd(cmd))
 	{
 		if (ft_custom_cmd_args(cmd, shell) == 1)
 		{
-			printf("command not find : %s\n", shell->tab[0]);
-			exit (127);
+			printf("command not found: %s\n", shell->tab[0]);
+			exit(127);
 		}
 		exit(0);
 	}
-	ft_cmd_test(cmd, envp);
+	ft_cmd_test(cmd, shell->envp);
 	exit(1);
 }
 
+pid_t	spawn_child(char *cmd, int prev_pipe, int fd[2], t_shell *shell)
+{
+	pid_t	pid;
 
-void	exec_pipes(char **command, char **envp, t_shell *shell)
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("fork");
+		return (-1);
+	}
+	if (pid == 0)
+		exec_child(cmd, prev_pipe, fd, shell);
+	if (prev_pipe != -1)
+		close(prev_pipe);
+	if (fd[1] != -1)
+		close(fd[1]);
+	return (pid);
+}
+
+void	exec_pipes(char **command, t_shell *shell)
 {
 	int		i;
 	int		fd[2];
 	int		prev_pipe;
-	pid_t	pid;
-	int		status;
 	pid_t	pids[1024];
+	int		status;
 
 	i = 0;
 	prev_pipe = -1;
@@ -112,18 +105,9 @@ void	exec_pipes(char **command, char **envp, t_shell *shell)
 	{
 		fd[0] = -1;
 		fd[1] = -1;
-		if (command[i + 1] != NULL && pipe(fd) == -1)
+		if (command[i + 1] && pipe(fd) == -1)
 			return (perror("pipe"));
-		pid = fork();
-		if (pid == -1)
-			return (perror("fork"));
-		if (pid == 0)
-			exec_child(command[i], prev_pipe, fd, envp, shell);
-		pids[i] = pid;
-		if (prev_pipe != -1)
-			close(prev_pipe);
-		if (command[i + 1] != NULL)
-			close(fd[1]);
+		pids[i] = spawn_child(command[i], prev_pipe, fd, shell);
 		prev_pipe = fd[0];
 		i++;
 	}

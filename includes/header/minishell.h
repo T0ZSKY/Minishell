@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/14 19:33:53 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/14 21:21:09 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ char	*replace_pipes(char *cmd);
 char	**split_path(char *path);
 void	ft_cd(char **tab, t_shell *shell);
 void	increment_shell_level(void);
-void	exec_pipes(char **command, char **envp, t_shell *shell);
-void	execute_child(char **args_copy, char **envp);
+void	exec_pipes(char **command, t_shell *shell);
+void	exec_child(char *cmd, int prev_pipe, int fd[2], t_shell *shell);
 int		is_complex(char *input);
 void	ft_export(char **tab, t_shell *shell);
 t_shell	*init_shell(char **envp);
@@ -93,5 +93,9 @@ int		get_var_length(char *str, int i);
 char	*get_var_name(char *str, int i, int len);
 char	*find_env_value(char *var_name, int len, char **envp);
 void	init_signals(void);
+int		process_redirection(char **cmd);
+char	*format_redirection_string(char *cmd, char *new_cmd);
+void	ft_handle_pipes(char *input, t_shell *shell);
+void	ft_execute_command(t_shell *shell, char *input);
 
 #endif
