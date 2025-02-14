@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/12 02:53:31 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/14 19:58:18 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ void	exec_child(char *cmd, int prev_pipe, int fd[2], char **envp, t_shell *shell
 	}
 	if (is_complex(cmd) && !ft_strnstr(cmd, "<<", ft_strlen(cmd)))
 	{
-		redirections(cmd);
+		cmd = redirections(cmd);
+		if (!cmd)
+			exit(1);
 		if (is_custom_cmd(cmd))
 			ft_custom_cmd_args(cmd, shell);
 		else

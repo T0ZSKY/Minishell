@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/12 03:02:32 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/14 20:00:46 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	ft_custom_cmd_args(char *cmd, t_shell *shell)
 {
 	char	**tab;
 	int		result;
-
 	tab = ft_split(cmd, ' ');
 	if (is_complex(cmd))
 		null_complex(tab);

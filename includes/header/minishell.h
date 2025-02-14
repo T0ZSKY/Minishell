@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/11 17:13:04 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/14 19:33:53 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		is_custom_cmd(char *s);
 void	ft_custom_cmd(t_shell *shell);
 char	**ft_splitfou(char *str);
 int		ft_custom_cmd_args(char *cmd, t_shell *shell);
-void	redirections(char *cmd);
+char	*redirections(char *cmd);
 int		heredoc(char *limiter);
 void	null_complex(char **redir);
 void	ft_cmd_test(char *cmd, char **envp);

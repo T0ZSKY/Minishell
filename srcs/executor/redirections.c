@@ -6,11 +6,56 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:36:08 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/13 15:56:50 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/14 20:00:28 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header/minishell.h"
+
+char	*add_spaces_redirections(char *cmd)
+{
+	int		i;
+	int		j;
+	int		len;
+	char	*new_cmd;
+
+	i = 0;
+	len = 0;
+	while (cmd[i]) // Calcul de la nouvelle taille avec les espaces ajoutés
+	{
+		if (cmd[i] == '>' || cmd[i] == '<')
+		{
+			len++;
+			if (cmd[i + 1] == '>' || cmd[i + 1] == '<')
+				i++;
+		}
+		len++;
+		i++;
+	}
+	new_cmd = malloc(len + 1);
+	if (!new_cmd)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (cmd[i]) // Remplissage avec espaces ajoutés
+	{
+		if (cmd[i] == '>' || cmd[i] == '<')
+		{
+			if (j > 0 && new_cmd[j - 1] != ' ')
+				new_cmd[j++] = ' ';
+			new_cmd[j++] = cmd[i++];
+			if (cmd[i] == '>' || cmd[i] == '<')
+				new_cmd[j++] = cmd[i++];
+			if (cmd[i] && cmd[i] != ' ')
+				new_cmd[j++] = ' ';
+		}
+		else
+			new_cmd[j++] = cmd[i++];
+	}
+	new_cmd[j] = '\0';
+	return (new_cmd);
+}
+
 
 //sacre here_doc pas gentil
 int heredoc(char *limiter)
@@ -40,21 +85,25 @@ int heredoc(char *limiter)
 }
 
 
-void	redirections(char *cmd)
+char	*redirections(char *cmd)
 {
 	int		i;
 	int		fd;
 	char	**command;
 
 	i = 0;
-	command = ft_split(cmd, ' ');
+	char *spaced_cmd = add_spaces_redirections(cmd);
+	if (!spaced_cmd)
+		return cmd;
+	command = ft_split(spaced_cmd, ' ');
+
 	while (command[i + 1])
 	{
 		if (ft_strcmp(command[i], ">") == 0)
 		{
 			fd = open(command[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			if (fd == -1)
-				return (perror(command[i + 1]), exit(1));
+				return (perror(command[i + 1]), NULL);
 			dup2(fd, STDOUT_FILENO);
 			close(fd);
 			free(command[i]);
@@ -64,7 +113,7 @@ void	redirections(char *cmd)
 		{
 			fd = open(command[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
 			if (fd == -1)
-				return (perror(command[i + 1]), exit(1));
+				return (perror(command[i + 1]), NULL);
 			dup2(fd, STDOUT_FILENO);
 			close(fd);
 			free(command[i]);
@@ -74,7 +123,7 @@ void	redirections(char *cmd)
 		{
 			fd = open(command[i + 1], O_RDONLY);
 			if (fd == -1)
-				return (perror(command[i + 1]), exit(1));
+				return (perror(command[i + 1]), NULL);
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 			free(command[i]);
@@ -84,7 +133,7 @@ void	redirections(char *cmd)
 		{
 			fd = heredoc(command[i + 1]);
 			if (fd == -1)
-				return (perror("heredoc"), exit(1));
+				return (perror("heredoc"), NULL);
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 			free(command[i]);
@@ -92,6 +141,8 @@ void	redirections(char *cmd)
 		}
 		i++;
 	}
+	free(cmd);
+	return spaced_cmd;
 }
 
 void	null_complex(char **redir)
