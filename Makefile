@@ -6,7 +6,7 @@
 #    By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 23:56:39 by tomlimon          #+#    #+#              #
-#    Updated: 2025/02/14 21:20:36 by tomlimon         ###   ########.fr        #
+#    Updated: 2025/02/15 21:02:45 by tomlimon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRCS = ./srcs/main/main.c \
 		./srcs/executor/executor.c ./srcs/parser/utils.c\
 		./srcs/utils/utils.c ./srcs/utils/find_path.c ./srcs/utils/shlvl.c ./srcs/utils/ascii.c\
 		./srcs/signals/signals.c ./srcs/utils/splitfou.c ./srcs/utils/utils_path.c\
-		./srcs/executor/pipes.c ./srcs/executor/redirections.c
+		./srcs/executor/pipes.c ./srcs/executor/redirections.c ./srcs/executor/redirection_utils.c
 
 LIBFT_DIR = ./includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -42,7 +42,7 @@ OBJ_DIR = obj
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 YELLOW = \033[0;33m
 GREEN = \033[0;32m

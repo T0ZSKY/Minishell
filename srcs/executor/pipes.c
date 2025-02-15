@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/14 20:58:21 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/15 20:32:53 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	exec_pipes(char **command, t_shell *shell)
 	pid_t	pids[1024];
 	int		status;
 
+	ft_memset(pids, 0, sizeof(pids));
 	i = 0;
 	prev_pipe = -1;
 	while (command[i])

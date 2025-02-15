@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/14 21:21:09 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/15 21:04:19 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,13 @@ int		process_redirection(char **cmd);
 char	*format_redirection_string(char *cmd, char *new_cmd);
 void	ft_handle_pipes(char *input, t_shell *shell);
 void	ft_execute_command(t_shell *shell, char *input);
+int		calculate_new_length(char *cmd);
+void	copy_with_spaces(char *dest, const char *src);
+int		handle_redirection(char *redir_type, char *file, int mode);
+int		process_redirections(char **command, int *i);
+int		process_heredoc_redirection(char **command, int *i);
+int		process_output_redirection(char **command, int *i);
+int		process_input_redirection(char **command, int *i);
+int		process_append_redirection(char **command, int *i);
 
 #endif

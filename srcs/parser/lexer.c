@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/14 21:19:25 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/15 20:28:55 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	ft_custom_cmd_args(char *cmd, t_shell *shell)
 	result = check_first_commands(tab, shell);
 	if (result == -1)
 		return (check_second_commands(tab, shell));
+	ft_free_tab(tab);
 	return (result);
 }
 
