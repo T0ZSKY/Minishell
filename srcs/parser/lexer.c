@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:48:48 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/15 20:28:55 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/19 10:36:36 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,16 @@ void	ft_custom_cmd(t_shell *shell)
 void	ft_lexer(char *input, t_shell *shell)
 {
 	char	*new_input;
+	int		preserve_quotes;
 
 	if (!input)
 		return ;
 	new_input = strdup(input);
 	if (!new_input)
 		return ;
-	shell->tab = ft_split(new_input, ' ');
+	preserve_quotes = (ft_strncmp(input, "echo", 4) == 0
+			&& (input[4] == ' ' || input[4] == '\0'));
+	shell->tab = ft_split_quotes(new_input, preserve_quotes);
 	if (!shell->tab || !shell->tab[0])
 	{
 		free(new_input);

@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 21:18:54 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/15 20:33:52 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/19 10:40:00 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,21 @@
 void	ft_handle_pipes(char *input, t_shell *shell)
 {
 	char	**split;
+	int		i;
+	char	*cleaned;
 
 	split = ft_split(input, '|');
 	free(input);
+	if (!split)
+		return ;
+	i = 0;
+	while (split[i])
+	{
+		cleaned = remove_quotes(split[i]);
+		free(split[i]);
+		split[i] = cleaned;
+		i++;
+	}
 	exec_pipes(split, shell);
 	ft_free_tab(split);
 }
