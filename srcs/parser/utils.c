@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:33:54 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/11 14:35:43 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:07:59 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,14 @@ int	is_custom_cmd(char *s)
 		|| ft_strstr(s, "unset"))
 		return (1);
 	return (0);
+}
+
+int	skip_quotes(char *str, int i, char quote)
+{
+	i++;
+	while (str[i] && str[i] != quote)
+		i++;
+	if (str[i] == quote)
+		i++;
+	return (i);
 }

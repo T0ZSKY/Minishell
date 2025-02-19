@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 23:35:54 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/11 15:32:10 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:06:45 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ char	**ft_add_env_var(char **envp, char *var)
 	}
 	new_env[i] = ft_strdup(var);
 	new_env[i + 1] = NULL;
+	free(envp);
 	return (new_env);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/19 10:17:04 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:08:09 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,7 @@ int		process_input_redirection(char **command, int *i);
 int		process_append_redirection(char **command, int *i);
 char	**ft_split_quotes(char *input, int preserve_quotes);
 char	*remove_quotes(char *str);
+void	free_envp(char **envp);
+int		skip_quotes(char *str, int i, char quote);
 
 #endif

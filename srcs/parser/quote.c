@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 09:52:47 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/19 10:40:55 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:07:46 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@ static int	is_whitespace(char c)
 static int	is_quote(char c)
 {
 	return (c == '\'' || c == '"');
-}
-
-static int	skip_quotes(char *str, int i, char quote)
-{
-	i++;
-	while (str[i] && str[i] != quote)
-		i++;
-	if (str[i] == quote)
-		i++;
-	return (i);
 }
 
 int	ft_count_word(char *input)
