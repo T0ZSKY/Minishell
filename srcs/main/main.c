@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/13 16:33:55 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/19 23:02:42 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static void	handle_input(char *input, t_shell *shell)
 		shell->is_running = 0;
 		return ;
 	}
+	if (input[0] != '\0')
+		add_history(input);
 	ft_lexer(input, shell);
 	if (shell->tab)
 		ft_free_tab(shell->tab);
-	if (input[0] != '\0')
-		add_history(input);
 	free(input);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 23:49:51 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/11 15:10:19 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/19 22:45:20 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,22 @@ static void	change_directory(char *path)
 void	ft_cd(char **tab, t_shell *shell)
 {
 	char	*home_path;
+	char	*old_pwd;
 
 	if (!check_path_exists(shell->envp))
 		return ;
-	home_path = get_home_path(shell->envp);
-	if (!tab[1])
+	old_pwd = get_current_pwd();
+	if (!old_pwd)
 	{
-		handle_home_dir(home_path);
+		printf("cd: error getting current directory\n");
+		g_last_exit_status = 1;
 		return ;
 	}
-	change_directory(tab[1]);
+	home_path = get_home_path(shell->envp);
+	if (!tab[1])
+		handle_home_dir(home_path);
+	else
+		change_directory(tab[1]);
+	update_pwd_vars(shell, old_pwd);
+	free(old_pwd);
 }
