@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:34:34 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/19 22:48:22 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/19 23:23:57 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,12 @@ int		skip_quotes(char *str, int i, char quote);
 char	*get_current_pwd(void);
 int		find_env_var(char **envp, const char *var_name);
 void	update_pwd_vars(t_shell *shell, char *old_pwd);
+char	*get_cleaned_token(char *input, int start, int end, int preserve);
+void	add_token(char **tokens, char *token, int *count);
+char	**ft_split_quotes(char *input, int preserve_quotes);
+int		is_whitespace(char c);
+int		is_quote(char c);
+int		ft_count_word(char *input);
+int		has_unclosed_quotes(char *str);
 
 #endif
