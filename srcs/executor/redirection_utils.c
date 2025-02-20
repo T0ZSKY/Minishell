@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 21:00:49 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/15 21:08:31 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:22:27 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	process_heredoc_redirection(char **command, int *i)
 
 	fd = heredoc(command[*i + 1]);
 	if (fd == -1)
-		return (perror("heredoc"), -1);
+	return (perror("heredoc"), -1);
 	dup2(fd, STDIN_FILENO);
 	close(fd);
 	free(command[*i]);

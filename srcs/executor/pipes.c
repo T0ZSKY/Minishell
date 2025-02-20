@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:10:07 by taomalbe          #+#    #+#             */
-/*   Updated: 2025/02/15 20:32:53 by tomlimon         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:08:46 by taomalbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 void	handle_heredoc(char *cmd, int *heredoc_fd)
 {
+	char	*space_cmd;
 	char	**split_cmd;
 	int		i;
 
 	i = 0;
+	space_cmd = add_spaces_redirections(cmd);
+	free(cmd);
+	cmd = ft_strdup(space_cmd);
+	free(space_cmd);
 	split_cmd = ft_split(cmd, ' ');
 	while (split_cmd[i] && ft_strcmp(split_cmd[i], "<<"))
 		i++;
