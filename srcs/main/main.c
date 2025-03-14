@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taomalbe <taomalbe@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:23:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2025/02/20 14:09:46 by taomalbe         ###   ########.fr       */
+/*   Updated: 2025/03/14 04:44:40 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	init_shell_env(t_shell *shell, char **envp, int argc, char **argv)
 
 	if (argc && argv)
 		shell->is_running = 1;
-	increment_shell_level();
 	ft_ascii();
 	tmp = init_shell(envp);
 	shell->envp = tmp->envp;
